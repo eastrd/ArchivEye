@@ -12,7 +12,6 @@ import {
   WriteOrAppendToFile,
 } from "./ocr";
 import { v4 as uuidv4 } from "uuid";
-import { writeFileSync } from "fs";
 
 let mainWindow: Electron.CrossProcessExports.BrowserWindow;
 const isProd: boolean = process.env.NODE_ENV === "production";

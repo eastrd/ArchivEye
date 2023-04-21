@@ -1,10 +1,20 @@
 // components/SetupScreen.js
-import { Button, Heading, Progress, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Progress,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import DirectoryPicker from "../components/DirectoryPicker";
 import DocsPicker from "../components/DocsScanner";
 import electron from "electron";
 import { phrases } from "../services/const";
+import Overlay from "../components/Overlay";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 
@@ -12,10 +22,16 @@ const randomWaitingPhrase = () => {
   return phrases[Math.floor(Math.random() * phrases.length)];
 };
 
+enum PgType {
+  Standby,
+  Indexing,
+  Complete,
+}
+
 const SetupScreen = () => {
   const [files, setFiles] = useState<FileList | null>(null);
   const [progressPerc, setProgressPerc] = useState(0.0);
-  const [inProgress, setInProgress] = useState(false);
+  const [progressType, setProgressType] = useState<PgType>(PgType.Standby);
   const [waitPhrase, setWaitPhrase] = useState("");
 
   useEffect(() => {
@@ -32,7 +48,7 @@ const SetupScreen = () => {
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
 
-    if (inProgress) {
+    if (progressType == PgType.Indexing) {
       intervalId = setInterval(() => {
         setWaitPhrase(randomWaitingPhrase());
       }, 4000);
@@ -41,14 +57,15 @@ const SetupScreen = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [inProgress]);
+  }, [progressType]);
 
   const handleFinishOCR = () => {
-    setInProgress(false);
+    setProgressType(PgType.Complete);
   };
 
   return (
     <VStack spacing={6} alignItems="left" minHeight="80vh" p={5}>
+      {progressType === PgType.Complete && <Overlay />}
       <Heading as="h1" size="xl">
         Setup
       </Heading>
@@ -56,7 +73,7 @@ const SetupScreen = () => {
         Index Database Path (One-time Only)
       </Heading>
       <DirectoryPicker
-        disabled={inProgress}
+        disabled={progressType === PgType.Indexing}
         buttonText={"1. Choose folder to store Index data"}
         ipcMessageType="open-directory-dialog"
       />
@@ -83,10 +100,14 @@ const SetupScreen = () => {
           colorScheme="pink"
           m={3}
         />
-        <Text>{inProgress && "Indexing... Please Wait..."}</Text>
+        <Text>
+          {progressType === PgType.Indexing && "Indexing... Please Wait..."}
+        </Text>
         <Text mb={3}> {waitPhrase} </Text>
         <Button
-          isDisabled={!files || files.length === 0 || inProgress}
+          isDisabled={
+            !files || files.length === 0 || progressType === PgType.Indexing
+          }
           type="submit"
           colorScheme="blue"
           width={"50%"}
@@ -94,12 +115,12 @@ const SetupScreen = () => {
             const paths = Array.from(files).map((file) => file.path);
             console.log(paths);
             ipcRenderer.send("file-list", paths);
-            setInProgress(true);
+            setProgressType(PgType.Indexing);
 
             ipcRenderer.invoke("done-ocr").then(handleFinishOCR);
           }}
         >
-          {inProgress ? (
+          {progressType === PgType.Indexing ? (
             <Text as="s"> 3. INDEX EM ALL </Text>
           ) : (
             <Text> 3. INDEX EM ALL </Text>
