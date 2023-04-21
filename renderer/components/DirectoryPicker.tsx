@@ -21,6 +21,7 @@ const DirectoryPicker = ({ ButtonText, IPCMessageType }: Props) => {
 
   return (
     <div style={{ textAlign: "center" }}>
+      {selectedDirectory && <p>Selected directory: {selectedDirectory}</p>}
       <Button
         type="submit"
         mt={4}
@@ -31,7 +32,6 @@ const DirectoryPicker = ({ ButtonText, IPCMessageType }: Props) => {
       >
         {ButtonText}
       </Button>
-      {selectedDirectory && <p>Selected directory: {selectedDirectory}</p>}
     </div>
   );
 };

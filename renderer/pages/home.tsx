@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import electron from "electron";
-import DocsPicker from "../components/DocsPicker";
+import DocsPicker from "../components/DocsScanner";
 import DirectoryPicker from "../components/DirectoryPicker";
 import { Button, Text, Heading, VStack } from "@chakra-ui/react";
 import Link from "next/link";

@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import DirectoryPicker from "../components/DirectoryPicker";
-import DocsPicker from "../components/DocsPicker";
+import DocsPicker from "../components/DocsScanner";
 import electron from "electron";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
@@ -16,34 +16,49 @@ const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 const SetupScreen = () => {
   const [indexPath, setIndexPath] = useState("");
   const [pdfPath, setPdfPath] = useState("");
+  const [files, setFiles] = useState<FileList | null>(null);
 
   return (
     <VStack spacing={6} alignItems="left" minHeight="80vh" p={5}>
       <Heading as="h1" size="xl">
         Before We Begin
       </Heading>
-      <FormControl id="indexPath" isRequired>
-        <FormLabel>1. Index Database Path (One-time Only)</FormLabel>
-        <DirectoryPicker
-          ButtonText={"Choose folder to store Index data"}
-          IPCMessageType="open-directory-dialog"
-        />
-      </FormControl>
-      <FormControl id="pdfPath" isRequired>
-        <FormLabel>2. PDF Documents Path</FormLabel>
+      <Heading as="h2" size="sm">
+        1. Index Database Path (One-time Only)
+      </Heading>
+      <DirectoryPicker
+        ButtonText={"Choose folder to store Index data"}
+        IPCMessageType="open-directory-dialog"
+      />
 
-        <DocsPicker
-          label=""
-          OnSubmitFiles={(files) => {
+      <Heading as="h2" size="sm">
+        2. PDF Documents Path
+      </Heading>
+      <DocsPicker
+        label=""
+        files={files}
+        setFiles={setFiles}
+        OnSubmitFiles={(files) => {
+          const paths = Array.from(files).map((file) => file.path);
+          console.log(paths);
+          ipcRenderer.send("file-list", paths);
+        }}
+      />
+      <div style={{ textAlign: "center" }}>
+        <Button
+          isDisabled={!files || files.length === 0}
+          type="submit"
+          colorScheme="blue"
+          width={"50%"}
+          onClick={() => {
             const paths = Array.from(files).map((file) => file.path);
             console.log(paths);
             ipcRenderer.send("file-list", paths);
           }}
-        />
-      </FormControl>
-      <Button type="submit" colorScheme="blue">
-        Initialize
-      </Button>
+        >
+          Initialize
+        </Button>
+      </div>
     </VStack>
   );
 };
