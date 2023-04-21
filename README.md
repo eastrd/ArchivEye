@@ -1,11 +1,17 @@
-# SeekFleet
+# ArchivEye
 
 ## TODO
 
-- Add initial tests with sample PDF to check if GS and Tesseract has been set up properly
+### Frontend
+
+- TODO
+
+### Backend
+
 - [x] Add indexing system
-- Add threading for multiple workers to index a directory
-- Implement index system
+- [ ] Add initial tests with sample PDF to check if GS and Tesseract has been set up properly
+- [ ] Add threading for multiple workers to index a directory
+- [ ] Implement index system
 
 
 ## Design
