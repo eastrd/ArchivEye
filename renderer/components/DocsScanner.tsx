@@ -12,12 +12,14 @@ import React from "react";
 type Props = {
   OnSubmitFiles: (files: FileList) => void;
   label: string | null;
+  hintText: string;
   files: FileList | null;
   setFiles: React.Dispatch<SetStateAction<FileList>>;
 };
 
 const DocsPicker = ({
   OnSubmitFiles: pnSubmitFiles,
+  hintText,
   label,
   files,
   setFiles,
@@ -94,9 +96,7 @@ const DocsPicker = ({
           bg="gray.50"
         >
           <Text fontSize="xl" fontWeight="semibold">
-            {files
-              ? `${files.length} PDF Files`
-              : "Click here or Drag the folder here"}
+            {files ? `${files.length} PDF Files` : hintText}
           </Text>
         </Box>
       </FormControl>

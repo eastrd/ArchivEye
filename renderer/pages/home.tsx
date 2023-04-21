@@ -42,12 +42,10 @@ function Home() {
         minHeight="80vh"
       >
         <Heading as="h1" size="2xl">
-          Welcome to PDF Search App
+          Welcome to ArchivEye
         </Heading>
-        <Text maxWidth="md" textAlign="center">
-          Easily search through your scanned PDF documents with OCR
-          capabilities. Get started by setting up your file paths and indexing
-          your documents.
+        <Text maxWidth="md">
+          Easily search through your scanned PDF documents with OCR capabilities
         </Text>
         <Link href="/setup">
           <Button colorScheme="blue">Get Started</Button>

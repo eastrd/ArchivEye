@@ -28,7 +28,7 @@ if (isProd) {
 
   mainWindow = createWindow("main", {
     width: 1000,
-    height: 600,
+    height: 800,
     autoHideMenuBar: true,
   });
 
@@ -47,8 +47,10 @@ app.on("window-all-closed", () => {
 
 // Let User select index db path
 let indexPath: string;
+let ocrProgress: number = 0;
 
 ipcMain.on("file-list", async (_event, paths) => {
+  let counter = 0;
   for (const p of paths) {
     // For now, only index PDF files
     if (path.extname(p) !== ".pdf") {
@@ -80,6 +82,9 @@ ipcMain.on("file-list", async (_event, paths) => {
     }
     console.log(`Finish OCR ${p}`);
     DeleteFolder(pageImgDir);
+
+    counter++;
+    ocrProgress = (counter / paths.length) * 100;
   }
 });
 
@@ -94,4 +99,20 @@ ipcMain.handle("open-directory-dialog", async (event) => {
   } else {
     return null;
   }
+});
+
+ipcMain.handle("get-ocr-progress", (event) => {
+  return ocrProgress;
+});
+
+ipcMain.handle("done-ocr", async () => {
+  return new Promise<void>((resolve) => {
+    const checkProgress = () => {
+      if (ocrProgress === 100) {
+        clearInterval(interval);
+        resolve();
+      }
+    };
+    const interval = setInterval(checkProgress, 1000); // Check every 1000ms (1 second)
+  });
 });

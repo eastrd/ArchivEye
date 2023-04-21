@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import electron from "electron";
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 
 type Props = {
-  ButtonText: string;
-  IPCMessageType: string;
+  buttonText: string;
+  ipcMessageType: string;
+  disabled: boolean;
 };
 
-const DirectoryPicker = ({ ButtonText, IPCMessageType }: Props) => {
+const DirectoryPicker = ({ buttonText, ipcMessageType, disabled }: Props) => {
   const [selectedDirectory, setSelectedDirectory] = useState("");
 
   const openDirectoryPicker = async () => {
-    const directoryPath = await ipcRenderer.invoke(IPCMessageType);
+    const directoryPath = await ipcRenderer.invoke(ipcMessageType);
     if (directoryPath) {
       setSelectedDirectory(directoryPath);
     }
@@ -25,12 +26,17 @@ const DirectoryPicker = ({ ButtonText, IPCMessageType }: Props) => {
       <Button
         type="submit"
         mt={4}
-        size="sm"
+        size="md"
+        isDisabled={disabled}
         width="50%"
         colorScheme="blue"
         onClick={openDirectoryPicker}
       >
-        {ButtonText}
+        {selectedDirectory ? (
+          <Text as="s"> {buttonText}</Text>
+        ) : (
+          <Text> {buttonText}</Text>
+        )}
       </Button>
     </div>
   );

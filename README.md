@@ -9,9 +9,22 @@
 ### Backend
 
 - [x] Add indexing system
-- [ ] Add initial tests with sample PDF to check if GS and Tesseract has been set up properly
+  - [x] Add progress feedback
+- [ ] Add search system
 - [ ] Add threading for multiple workers to index a directory
-- [ ] Implement index system
+- [ ] Add initial tests to verify OCR and Img Ext are working with sample PDF and images and texts
+
+
+### Frontend
+
+- [x] Setup Page: Index Folder & PDF Document Folder setter
+  - [x] Receive backend's OCR progress and display it on a horizontal progress bar
+  - [x] Cross out (1) button after selection, cross out (2) button after indexing starts
+  - [x] Make both of buttons disabled after indexing starts
+  - [x] Add relevant random wait phrases
+  - [ ] When OCR is completed, show an overlay with a button that proceeds to search page
+- [ ] Search Page
+- [ ] DARK THEME MYSELF PLZZZZ! IT'S HURTING MY OWN EYES
 
 
 ## Design
