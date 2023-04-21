@@ -1,0 +1,53 @@
+CORRECTION DATA
+
+y a
+
+OBSERVER
+
+Y
+
+y
+
+M mM’ M
+
+SOURCE TRANSMITTER RECEIVER CORRECTING
+DEVICE
+
+Fig. 8—Schematic diagram of a correction system.
+
+Roughly then, H,(x) is the amount of additional information that must be supplied per second at the
+receiving point to correct the received message.
+
+To prove the first part, consider long sequences of received message M’ and corresponding original
+message M. There will be logarithmically TH,(x) of the M’s which could reasonably have produced each
+M'. Thus we have TH, (x) binary digits to send each T seconds. This can be done with € frequency of errors
+on a channel of capacity Hy(x).
+
+The second part can be proved by noting, first, that for any discrete chance variables x, y, z
+
+Hy(x,2) > Hy(2).
+
+The left-hand side can be expanded to give
+
+=
+Ayz(x) 2 Ay (x) _ A(z) 2
+
+If we identify x as the output of the source, y as the received signal and z as the signal sent over the correction
+channel, then the right-hand side is the equivocation less the rate of transmission over the correction channel.
+If the capacity of this channel is less than the equivocation the right-hand side will be greater than zero and
+Hy-(x) > 0. But this is the uncertainty of what was sent, knowing both the received signal and the correction
+signal. If this is greater than zero the frequency of errors cannot be arbitrarily small.
+
+Example:
+
+Suppose the errors occur at random in a sequence of binary digits: probability p that a digit is wrong
+and g = | — p that it is right. These errors can be corrected if their position is known. Thus the
+correction channel need only send information as to these positions. This amounts to transmitting
+from a source which produces binary digits with probability p for 1 (incorrect) and q for 0 (correct).
+This requires a channel of capacity
+
+—[plogp + qlogq]
+
+which is the equivocation of the original system.
+
+The rate of transmission R can be written in two other forms due to the identities noted above. We have

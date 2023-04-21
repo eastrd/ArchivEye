@@ -1,0 +1,43 @@
+1/2
+
+Fig. 12—-Examples of discrete channels with the same transition probabilities for each input and for each output.
+
+In Fig. 12a it would be
+C = log4 — log2 = log?2.
+
+This could be achieved by using only the Ist and 3d symbols. In Fig. 12b
+C=log4—- 2 log3 - zlog6
+= log4 — log3 — zlog2
+= log 193 .
+In Fig. 12c we have
+C = log3 — 5 log2 — 4 log3 — 4 log6
+3
+= log Sahel
+Suppose the symbols fall into several groups such that the noise never causes a symbol in one group to
+be mistaken for a symbol in another group. Let the capacity for the nth group be C,, (in bits per second)
+
+when we use only the symbols in this group. Then it is easily shown that, for best use of the entire set, the
+
+total probability P,, of all symbols in the nth group should be
+2on
+P,= al Gr
+
+Within a group the probability is distributed just as it would be if these were the only symbols being used.
+The channel capacity is
+
+C= logy 2%.
+17. AN EXAMPLE OF EFFICIENT CODING
+
+The following example, although somewhat unrealistic, is a case in which exact matching to a noisy channel
+is possible. There are two channel symbols, 0 and 1, and the noise affects them in blocks of seven symbols.
+A block of seven is either transmitted without error, or exactly one symbol of the seven is incorrect. These
+eight possibilities are equally likely. We have
+
+C = Max [H(y) — H,(y)]
+= 7[7+ glog 3]
+= 4 bits/symbol.
+
+An efficient code, allowing complete correction of errors and transmitting at the rate C, is the following
+(found by a method due to R. Hamming):
+
+27

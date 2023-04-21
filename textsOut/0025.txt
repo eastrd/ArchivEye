@@ -1,0 +1,56 @@
+As in the noiseless case a delay is generally required to approach the ideal encoding. It now has the
+additional function of allowing a large sample of noise to affect the signal before any judgment is made
+at the receiving point as to the original message. Increasing the sample size always sharpens the possible
+statistical assertions.
+
+The content of Theorem 11 and its proof can be formulated in a somewhat different way which exhibits
+the connection with the noiseless case more clearly. Consider the possible signals of duration T and suppose
+a subset of them is selected to be used. Let those in the subset all be used with equal probability, and suppose
+the receiver is constructed to select, as the original signal, the most probable cause from the subset, when a
+perturbed signal is received. We define N(T,q) to be the maximum number of signals we can choose for the
+subset such that the probability of an incorrect interpretation is less than or equal to q.
+
+logN(T
+Theorem 12: Lim end) it 9) = C, where C is the channel capacity, provided that q does not equal 0 or
+>
+
+1.
+In other words, no matter how we set out limits of reliability, we can distinguish reliably in time T
+
+enough messages to correspond to about CT bits, when T is sufficiently large. Theorem 12 can be compared
+with the definition of the capacity of a noiseless channel given in Section 1.
+
+15. EXAMPLE OF A DISCRETE CHANNEL AND ITS CAPACITY
+
+A simple example of a discrete channel is indicated in Fig. 11. There are three possible symbols. The first is
+never affected by noise. The second and third each have probability p of coming through undisturbed, and
+q of being changed into the other of the pair. We have (letting a = —[plogp + qlogq] and P and Q be the
+
+o—__»__®
+P
+TRANSMITTED q RECEIVED
+SYMBOLS SYMBOLS
+q
+P
+
+Fig. 11—Example of a discrete channel.
+probabilities of using the first and second symbols)
+
+H(x) = —PlogP —2QlogQ
+Hy (x) = 2Qa.
+We wish to choose P and Q in such a way as to maximize H (x) — H,(x), subject to the constraint P+ 20 = 1.
+
+Hence we consider
+U = —PlogP —2QlogQ —2Qa+ \(P+2Q)
+
+oU
+oU
+— = -2-21 —2 2rA= 0.
+30 ogQ-—2a+2A=0
+
+Eliminating >
+
+logP = logQ+a
+P =e" =08
+
+25

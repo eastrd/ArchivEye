@@ -1,0 +1,59 @@
+average the frequency of errors over this group and show that this average can be made less than e. If the
+average of a set of numbers is less than € there must exist at least one in the set which is less than €. This
+will establish the desired result.
+
+The capacity C of a noisy channel has been defined as
+
+C = Max (H(x) _ Hy(x))
+
+where x is the input and y the output. The maximization is over all sources which might be used as input to
+the channel.
+
+Let So be a source which achieves the maximum capacity C. If this maximum is not actually achieved
+by any source let Sp be a source which approximates to giving the maximum rate. Suppose So is used as
+input to the channel. We consider the possible transmitted and received sequences of a long duration T. The
+following will be true:
+
+1. The transmitted sequences fall into two classes, a high probability group with about 27”) members
+and the remaining sequences of small total probability.
+
+2. Similarly the received sequences have a high probability set of about 27”) members and a low
+probability set of remaining sequences.
+
+3. Each high probability output could be produced by about 27") inputs. The probability of all other
+cases has a small total probability.
+
+All the e’s and 6’s implied by the words “small” and “about” in these statements approach zero as we
+allow T to increase and So to approach the maximizing source.
+
+The situation is summarized in Fig. 10 where the input sequences are points on the left and output
+sequences points on the right. The fan of cross lines represents the range of possible causes for a typical
+output.
+
+E
+e
+M e
+e e
+e e
+
+QH(x)T
+HIGH PROBABILITY QH(y)T
+MESSAGES HIGH PROBABILITY
+RECEIVED SIGNALS
+QHy(x)T
+REASONABLE CAUSES
+e FOR EACH E e
+e e
+
+QH.(y)T
+@ REASONABLE EFFECTS @
+FOR EACH M
+e
+
+Fig. 10—Schematic representation of the relations between inputs and outputs in a channel.
+Now suppose we have another source producing information at rate R with R < C. In the period T this
+
+source will have 27* high probability messages. We wish to associate these with a selection of the possible
+channel inputs in such a way as to get a small frequency of errors. We will set up this association in all
+
+23

@@ -1,0 +1,61 @@
+as the source which maximizes the entropy in the channel. The content of Theorem 9 is that, although an
+exact match is not in general possible, we can approximate it as closely as desired. The ratio of the actual
+rate of transmission to the capacity C may be called the efficiency of the coding system. This is of course
+equal to the ratio of the actual entropy of the channel symbols to the maximum possible entropy.
+
+In general, ideal or nearly ideal encoding requires a long delay in the transmitter and receiver. In the
+noiseless case which we have been considering, the main function of this delay is to allow reasonably good
+matching of probabilities to corresponding lengths of sequences. With a good code the logarithm of the
+reciprocal probability of a long message must be proportional to the duration of the corresponding signal, in
+fact
+
+logp7!
+a
+must be small for all but a small fraction of the long messages.
+
+If a source can produce only one particular message its entropy is zero, and no channel is required. For
+example, a computing machine set up to calculate the successive digits of 7 produces a definite sequence
+with no chance element. No channel is required to “transmit” this to another point. One could construct a
+second machine to compute the same sequence at the point. However, this may be impractical. In such a case
+we can choose to ignore some or all of the statistical knowledge we have of the source. We might consider
+the digits of 7 to be a random sequence in that we construct a system capable of sending any sequence of
+digits. In a similar way we may choose to use some of our statistical knowledge of English in constructing
+a code, but not all of it. In such a case we consider the source with the maximum entropy subject to the
+statistical conditions we wish to retain. The entropy of this source determines the channel capacity which
+is necessary and sufficient. In the 7 example the only information retained is that all the digits are chosen
+from the set 0,1,...,9. In the case of English one might wish to use the statistical saving possible due to
+letter frequencies, but nothing else. The maximum entropy source is then the first approximation to English
+and its entropy determines the required channel capacity.
+
+As a simple example of some of these results consider a source which produces a sequence of letters
+chosen from among A, B, C, D with probabilities 5; i: - - successive symbols being chosen independently.
+We have
+
+-¢|
+
+H = —(slog} +4 log} +3 log 3)
+= t bits per symbol.
+
+Thus we can approximate a coding system to encode messages from this source into binary digits with an
+average of t binary digit per symbol. In this case we can actually achieve the limiting value by the following
+code (obtained by the method of the second proof of Theorem 9):
+
+A 0
+B 10
+Cc 110
+D 111
+
+The average number of binary digits used in encoding a sequence of N symbols will be
+
+It is easily seen that the binary digits 0, 1 have probabilities 5 5 so the H for the coded sequences is one
+bit per symbol. Since, on the average, we have { binary symbols per original letter, the entropies on a time
+basis are the same. The maximum possible entropy for the original set is log4 = 2, occurring when A, B, C,
+D have probabilities - i + i: Hence the relative entropy is Z. We can translate the binary sequences into
+the original set of symbols on a two-to-one basis by the following table:
+
+00 A’
+Ol B'
+10 C'
+11 D!
+
+18

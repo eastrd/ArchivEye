@@ -1,0 +1,69 @@
+Suppose we have a system of constraints on possible sequences of the type which can be represented by
+a linear graph as in Fig. 2. If probabilities py) were assigned to the various lines connecting state i to state j
+this would become a source. There is one particular assignment which maximizes the resulting entropy (see
+Appendix 4).
+
+Theorem 8: Let the system of constraints considered as a channel have a capacity C = logW. If we
+assign
+
+)
+
+where ee is the duration of the s"" symbol leading from state i to state j and the B; satisfy
+
+_ (s)
+B=) B)Ww
+SJ
+then H is maximized and equal to C.
+
+By proper assignment of the transition probabilities the entropy of symbols on a channel can be maxi-
+mized at the channel capacity.
+
+9. THE FUNDAMENTAL THEOREM FOR A NOISELESS CHANNEL
+
+We will now justify our interpretation of H as the rate of generating information by proving that H deter-
+mines the channel capacity required with most efficient coding.
+
+Theorem 9: Let a source have entropy H (bits per symbol) and a channel have a capacity C (bits per
+second). Then it is possible to encode the output of the source in such a way as to transmit at the average
+
+rate HE symbols per second over the channel where « is arbitrarily small. It is not possible to transmit at
+
+Cc
+an average rate greater than W
+
+C .
+The converse part of the theorem, that Fi cannot be exceeded, may be proved by noting that the entropy
+
+of the channel input per second is equal to that of the source, since the transmitter must be non-singular, and
+also this entropy cannot exceed the channel capacity. Hence H’ < C and the number of symbols per second
+= H'/H <C/H.
+
+The first part of the theorem will be proved in two different ways. The first method is to consider the
+set of all sequences of N symbols produced by the source. For N large we can divide these into two groups,
+one containing less than 2(7+”)" members and the second containing less than 28 members (where R is
+the logarithm of the number of different symbols) and having a total probability less than p. As N increases
+7 and ys approach zero. The number of signals of duration T in the channel is greater than 2(C-9)T with 6
+small when T is large. if we choose
+
+r= (2 + r) N
+AC
+
+then there will be a sufficient number of sequences of channel symbols for the high probability group when
+N and T are sufficiently large (however small A) and also some additional ones. The high probability group
+is coded in an arbitrary one-to-one way into this set. The remaining sequences are represented by larger
+sequences, starting and ending with one of the sequences not used for the high probability group. This
+special sequence acts as a start and stop signal for a different code. In between a sufficient time is allowed
+to give enough different sequences for all the low probability messages. This will require
+
+1=(+y\n
+1=\err
+
+where y is small. The mean rate of transmission in message symbols per second will then be greater than
+-1
+T T, H R
+1-8) —464| = |(1-8)(S+2) +9(S +)
+la-an4 + [i—o)(Z+a) +5(E+
+
+16
+
+-1

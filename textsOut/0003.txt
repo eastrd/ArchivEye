@@ -1,0 +1,56 @@
+physical counterparts. We may roughly classify communication systems into three main categories: discrete,
+continuous and mixed. By a discrete system we will mean one in which both the message and the signal
+are a sequence of discrete symbols. A typical case is telegraphy where the message is a sequence of letters
+and the signal a sequence of dots, dashes and spaces. A continuous system is one in which the message and
+signal are both treated as continuous functions, e.g., radio or television. A mixed system is one in which
+both discrete and continuous variables appear, e.g., PCM transmission of speech.
+
+We first consider the discrete case. This case has applications not only in communication theory, but
+also in the theory of computing machines, the design of telephone exchanges and other fields. In addition
+the discrete case forms a foundation for the continuous and mixed cases which will be treated in the second
+half of the paper.
+
+PART I: DISCRETE NOISELESS SYSTEMS
+
+1. THE DISCRETE NOISELESS CHANNEL
+
+Teletype and telegraphy are two simple examples of a discrete channel for transmitting information. Gen-
+erally, a discrete channel will mean a system whereby a sequence of choices from a finite set of elementary
+symbols S;,...,5, can be transmitted from one point to another. Each of the symbols S; is assumed to have
+a certain duration in time t; seconds (not necessarily the same for different S;, for example the dots and
+dashes in telegraphy). It is not required that all possible sequences of the S$; be capable of transmission on
+the system; certain sequences only may be allowed. These will be possible signals for the channel. Thus
+in telegraphy suppose the symbols are: (1) A dot, consisting of line closure for a unit of time and then line
+open for a unit of time; (2) A dash, consisting of three time units of closure and one unit open; (3) A letter
+space consisting of, say, three units of line open; (4) A word space of six units of line open. We might place
+the restriction on allowable sequences that no spaces follow each other (for if two letter spaces are adjacent,
+it is identical with a word space). The question we now consider is how one can measure the capacity of
+such a channel to transmit information.
+
+In the teletype case where all symbols are of the same duration, and any sequence of the 32 symbols
+is allowed the answer is easy. Each symbol represents five bits of information. If the system transmits n
+symbols per second it is natural to say that the channel has a capacity of 5n bits per second. This does not
+mean that the teletype channel will always be transmitting information at this rate — this is the maximum
+possible rate and whether or not the actual rate reaches this maximum depends on the source of information
+which feeds the channel, as will appear later.
+
+In the more general case with different lengths of symbols and constraints on the allowed sequences, we
+make the following definition:
+
+Definition: The capacity C of a discrete channel is given by
+C= Lim 2X
+TR 0
+where N(T) is the number of allowed signals of duration T.
+
+It is easily seen that in the teletype case this reduces to the previous result. It can be shown that the limit
+in question will exist as a finite number in most cases of interest. Suppose all sequences of the symbols
+S1,---,S, are allowed and these symbols have durations f1,...,f,. What is the channel capacity? If N(r)
+represents the number of sequences of duration t we have
+
+N(t)=N(t—th) +N(t—t2) +--+ N(t—-th).
+
+The total number is equal to the sum of the numbers of sequences ending in S;,52,...,S, and these are
+N(t —t),N(t —t2),...,N(t —t), respectively. According to a well-known result in finite differences, N(t)
+is then asymptotic for large t to X4 where Xo is the largest real solution of the characteristic equation:
+
+XN XP. +X MAI

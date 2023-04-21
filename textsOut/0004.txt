@@ -1,0 +1,56 @@
+and therefore
+C= logXo.
+
+In case there are restrictions on allowed sequences we may still often obtain a difference equation of this
+type and find C from the characteristic equation. In the telegraphy case mentioned above
+
+N(t) = N(t—2)+N(t—4) +N(t—5) +N(t—7) + N(t— 8) + N(t — 10)
+
+as we see by counting sequences of symbols according to the last or next to the last symbol occurring.
+Hence C is —log jup where jug is the positive root of 1 = py? + p++ p?+p7+p8 + py!°. Solving this we find
+C =0.539.
+
+A very general type of restriction which may be placed on allowed sequences is the following: We
+imagine a number of possible states a;,a2,...,@m. For each state only certain symbols from the set S1,..., Sy
+can be transmitted (different subsets for the different states). When one of these has been transmitted the
+state changes to a new state depending both on the old state and the particular symbol transmitted. The
+telegraph case is a simple example of this. There are two states depending on whether or not a space was
+the last symbol transmitted. If so, then only a dot or a dash can be sent next and the state always changes.
+If not, any symbol can be transmitted and the state changes if a space is sent, otherwise it remains the same.
+The conditions can be indicated in a linear graph as shown in Fig. 2. The junction points correspond to the
+
+DASH
+
+WORD SPACE
+
+Fig. 2—Graphical representation of the constraints on telegraph symbols.
+
+states and the lines indicate the symbols possible in a state and the resulting state. In Appendix 1 it is shown
+that if the conditions on allowed sequences can be described in this form C will exist and can be calculated
+in accordance with the following result:
+
+Theorem I: Let pW) be the duration of the s‘" symbol which is allowable in state i and leads to state j.
+Then the channel capacity C is equal to logW where W is the largest real root of the determinant equation:
+
+(5)
+yw - 64 =0
+5
+
+where 6;; = | ifi = j and is zero otherwise.
+
+For example, in the telegraph case (Fig. 2) the determinant is:
+
+-1 (W-?+W-4) _0
+(W3+Ww-*) (W?2+W-4-1)|) 0 ~
+
+On expansion this leads to the equation given above for this case.
+
+2. THE DISCRETE SOURCE OF INFORMATION
+
+We have seen that under very general conditions the logarithm of the number of possible signals in a discrete
+channel increases linearly with time. The capacity to transmit information can be specified by giving this
+rate of increase, the number of bits per second required to specify the particular signal used.
+
+We now consider the information source. How is an information source to be described mathematically,
+and how much information in bits per second is produced in a given source? The main point at issue is the
+effect of statistical knowledge about the source in reducing the required capacity of the channel, by the use
