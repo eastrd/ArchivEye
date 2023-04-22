@@ -1,8 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import electron from "electron";
-import DocsPicker from "../components/DocsScanner";
-import DirectoryPicker from "../components/DirectoryPicker";
 import { Button, Text, Heading, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 
@@ -20,21 +17,6 @@ function Home() {
       <Head>
         <title>ArchivEye</title>
       </Head>
-
-      {/* <div>
-        <DocsPicker
-          OnSubmitFiles={(files) => {
-            const paths = Array.from(files).map((file) => file.path);
-            console.log(paths);
-            ipcRenderer.send("file-list", paths);
-          }}
-        />
-        <DirectoryPicker
-          ButtonText={"Choose folder for Generated Index Data"}
-          IPCMessageType="open-directory-dialog"
-        />
-      </div> */}
-
       <VStack
         spacing={6}
         alignItems="center"

@@ -1,7 +1,6 @@
 // components/SetupScreen.js
 import { Button, Heading, Progress, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import DirectoryPicker from "../components/DirectoryPicker";
 import DocsPicker from "../components/DocsScanner";
 import electron from "electron";
 import { phrases } from "../services/const";
