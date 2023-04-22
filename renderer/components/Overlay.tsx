@@ -44,7 +44,7 @@ const Overlay = ({ link }: Props) => {
               </Center>
             </Box>
             <Text color={"white"}>Indexing Completed!</Text>
-            <Link href={isProd ? `app://./${link}.html` : `/${link}`}>
+            <Link href={isProd ? `app://./${link}.html` : `${link}`}>
               <Button colorScheme="teal">Start Searching</Button>
             </Link>
           </VStack>
