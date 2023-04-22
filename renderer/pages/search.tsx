@@ -9,11 +9,29 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import electron from "electron";
+import { useCallback, useEffect, useState } from "react";
+import { SearchResult } from "../services/types";
+import ResultsDisplay from "../components/ResultsDisplay";
+
+const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 
 const Search = () => {
   const [currentOpenedPDF, setCurrentOpenedPDF] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<Array<SearchResult>>([]);
+
+  // Prevent stale search results being used
+  const handleSearchResult = useCallback((event, result: SearchResult) => {
+    setSearchResults((prevSearchResults) => [result, ...prevSearchResults]);
+  }, []);
+
+  useEffect(() => {
+    ipcRenderer.on("search-result", handleSearchResult);
+    return () => {
+      ipcRenderer.removeListener("search-result", handleSearchResult);
+    };
+  }, [handleSearchResult]);
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -21,8 +39,9 @@ const Search = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    // Implement your search logic here, e.g., call an API or filter data
-    console.log("Search", searchQuery);
+    setSearchResults([]);
+    console.log("[+] Search", searchQuery);
+    ipcRenderer.send("search-request", searchQuery);
   };
 
   return (
@@ -39,7 +58,7 @@ const Search = () => {
               value={searchQuery}
               onChange={handleSearchInputChange}
               placeholder="Search your indexed PDFs..."
-              flexGrow={1} // Make the input grow to fill available space
+              flexGrow={1}
             />
             <Button type="submit" colorScheme="teal" ml={2}>
               Search
@@ -53,12 +72,20 @@ const Search = () => {
           <Text fontWeight="bold" mb={2}>
             Search Results
           </Text>
-          {/* Display search results list here */}
+          <ResultsDisplay
+            handleOnView={(result: SearchResult) =>
+              console.log(
+                "TODO: Pass PDF to viewer to the right side for ",
+                result.docName
+              )
+            }
+            results={searchResults}
+          />
         </Box>
         <Divider
           width="1px"
           color="white"
-          borderColor={"white"}
+          borderColor={"gray"}
           orientation="vertical"
           height="100%"
         />
@@ -67,7 +94,11 @@ const Search = () => {
             PDF Viewer
           </Text>
           {/* Embed PDF viewer here */}
-          <Button colorScheme="green" onClick={() => {}}>
+          <Button
+            isDisabled={currentOpenedPDF.length === 0}
+            colorScheme="green"
+            onClick={() => {}}
+          >
             Open Original File
           </Button>
         </Box>

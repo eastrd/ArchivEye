@@ -3,14 +3,21 @@ import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import path from "path";
 import {
-  CreateFolder,
-  DeleteFolder,
-  PDFToImgs,
-  TessCMD,
-  WriteOrAppendToFile,
+  createFolder,
+  deleteFolder,
+  parseIndexDB,
+  pdfToImgs,
+  tessCMD,
+  writeOrAppendToFile,
 } from "./ocr";
 import { v4 as uuidv4 } from "uuid";
-import { createFolderIfNotExists } from "../renderer/services/util";
+import {
+  createFolderIfNotExists,
+  searchTextInFile,
+} from "../renderer/services/util";
+import { IndexRecord, SearchResult } from "../renderer/services/types";
+import { INDEX_DB_FILENAME, SEP } from "../renderer/services/const";
+import fsp from "fs/promises";
 
 let mainWindow: Electron.CrossProcessExports.BrowserWindow;
 const isProd: boolean = process.env.NODE_ENV === "production";
@@ -43,10 +50,10 @@ app.on("window-all-closed", () => {
   app.quit();
 });
 
-// Let User select index db path
 const appPath: string = app.getAppPath();
 // Create `_index` folder if not exist
 const indexPath: string = path.join(appPath, "_index");
+
 createFolderIfNotExists(indexPath);
 
 let ocrProgress: number = 0;
@@ -63,29 +70,29 @@ ipcMain.on("file-list", async (_event, paths) => {
 
     const uid = uuidv4();
     // Append the "UUID to book path relation" to a master CSV
-    const dbPath = path.join(indexPath, "master.sf");
-    const record = `${uid}|||${p}`;
-    WriteOrAppendToFile(dbPath, record + "\n");
+    const dbPath = path.join(indexPath, INDEX_DB_FILENAME);
+    const record = `${uid}${SEP}${p}`;
+    writeOrAppendToFile(dbPath, record + "\n");
 
     // Create a temp folder to contain all extracted page images from the PDF
     const pageImgDir = path.join(indexPath, `tmp_${uid}`);
-    CreateFolder(pageImgDir);
+    createFolder(pageImgDir);
 
     // Create a folder for OCR'd texts
     const txtDir = path.join(indexPath, `${uid}`);
-    CreateFolder(txtDir);
+    createFolder(txtDir);
 
-    const pageImgNames = await PDFToImgs(p, pageImgDir);
+    const pageImgNames = await pdfToImgs(p, pageImgDir);
     for (const pageImgName of pageImgNames) {
       const pageImgPath = path.join(pageImgDir, pageImgName);
 
-      await TessCMD(pageImgPath, txtDir).catch((err) =>
+      await tessCMD(pageImgPath, txtDir).catch((err) =>
         console.log(`Tesseract error when ocr ${p}: ${err}`)
       );
       console.log(`OCR'd Page ${pageImgName}`);
     }
     console.log(`Finish OCR ${p}`);
-    DeleteFolder(pageImgDir);
+    deleteFolder(pageImgDir);
 
     counter++;
     ocrProgress = (counter / paths.length) * 100;
@@ -104,6 +111,37 @@ ipcMain.handle("done-ocr", async () => {
         resolve();
       }
     };
-    const interval = setInterval(checkProgress, 1000); // Check every 1000ms (1 second)
+    const interval = setInterval(checkProgress, 1000); // Check every second
   });
+});
+
+ipcMain.on("search-request", (event, searchQuery: SearchResult) => {
+  // Use master index db to go through all text files
+  parseIndexDB(path.join(indexPath, INDEX_DB_FILENAME)).then(
+    (records: Array<IndexRecord>) => {
+      for (const record of records) {
+        const { id, docPath } = record;
+        // Recursively search the index folder that contains text
+        const indexDocPath = path.join(indexPath, id);
+        fsp.readdir(indexDocPath).then((files) => {
+          for (const file of files) {
+            // file is just the page text file name, not full path
+            const p = path.join(indexDocPath, file);
+            searchTextInFile(p, searchQuery).then((res) => {
+              if (res.success && res.matches > 0) {
+                console.log(`Found at page ${file} of ${docPath}`);
+                const result: SearchResult = {
+                  docName: path.basename(docPath),
+                  docPath: docPath,
+                  id,
+                  page: parseInt(file.replace(".txt", ""), 10),
+                };
+                event.sender.send("search-result", result);
+              }
+            });
+          }
+        });
+      }
+    }
+  );
 });

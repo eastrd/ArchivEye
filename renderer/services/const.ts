@@ -1,4 +1,4 @@
-const phrases = [
+export const phrases = [
   "Cracking the case of the cryptic PDFs...",
   "Hold tight, our digital detectives are on the case!",
   "Patience is the key, even Sherlock Holmes had to wait sometimes...",
@@ -20,5 +20,7 @@ const phrases = [
   "Let's solve this paper puzzle together!",
   "Late-night indexing, the unsung hero of document search!",
 ];
-
-export { phrases };
+export const INDEX_DB_FILENAME = "master.sf";
+export const SEP = "|||";
+export const SamplePDF =
+  "D:/LibGen/NonFiction/1000/[Article] A Mathematical Theory of Communication_bb0283f61b7a5457d74caa9c791e11eb.pdf";

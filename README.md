@@ -18,6 +18,8 @@
 
 ### Frontend
 
+- [x] DARK THEME MYSELF PLZZZZ! IT'S HURTING MY OWN EYES
+  - [ ] Fix inconsistent dark mode
 - [x] Setup Page: Index Folder & PDF Document Folder setter
   - [x] Receive backend's OCR progress and display it on a horizontal progress bar
   - [x] Cross out (1) button after selection, cross out (2) button after indexing starts
@@ -25,9 +27,12 @@
   - [x] Add relevant random wait phrases
   - [x] When OCR is completed, show an overlay with a button that proceeds to search page
 - [x] Refactor out index path setting
-- [ ] Search Page
-- [ ] DARK THEME MYSELF PLZZZZ! IT'S HURTING MY OWN EYES
-
+- [x] Search Page: Initial Layout 
+  - [x] Update search result continuously
+  - [x] Display on a results table (Fix partial state issue)
+  - [x] Tooltip on hover of the pdf document name
+  - [ ] Implement view to the side
+  - [ ] Spike: PDF Viewer
 
 ## Design
 
