@@ -95,8 +95,8 @@ const DocsPicker = ({
           _hover={{ borderColor: "gray.400" }}
           bg="gray.50"
         >
-          <Text fontSize="xl" fontWeight="semibold">
-            {files ? `${files.length} PDF Files` : hintText}
+          <Text color={"black"} fontSize="xl" fontWeight="semibold">
+            {files ? `Found ${files.length} PDF Files` : hintText}
           </Text>
         </Box>
       </FormControl>
