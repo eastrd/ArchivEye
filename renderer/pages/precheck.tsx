@@ -12,6 +12,7 @@ import {
 import DirectoryPicker from "../components/DirectoryPicker";
 import { Heading } from "@chakra-ui/react";
 import { ipcRenderer } from "electron";
+import SetupInstructions from "../components/SetupInstructions";
 
 const isProd: boolean = process.env.NODE_ENV === "production";
 
@@ -36,7 +37,8 @@ function PreCheck() {
       <Heading as="h1" size="2xl" mb={5}>
         First-time Setup
       </Heading>
-      <Box width="90%">
+      <SetupInstructions />
+      <Box pt={5} width="90%">
         <FormControl mb={3}>
           <Flex justifyContent="space-between" alignItems="center">
             <FormLabel flexBasis={"20%"}>Tesseract Path</FormLabel>
@@ -104,7 +106,7 @@ function PreCheck() {
                 )
             }
           >
-            Proceed to Indexing
+            Validate & Proceed
           </Button>
         </Flex>
       </Box>
