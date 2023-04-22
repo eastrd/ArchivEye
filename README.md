@@ -22,6 +22,7 @@
   - [x] Add relevant random wait phrases
   - [x] When OCR is completed, show an overlay with a button that proceeds to search page
   - [x] Check if index DB already exists, if so provide an option to go straight to search
+  - [x] Add option to index more documents
 - [x] Refactor out index path setting
 - [x] Search Page: Initial Layout 
   - [x] Update search result continuously

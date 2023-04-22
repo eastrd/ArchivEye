@@ -47,9 +47,19 @@ const Search = () => {
 
   return (
     <VStack h="100vh" pt={5} alignItems="center">
-      <Heading as="h1" size="xl">
-        OCR Search
-      </Heading>
+      <Flex justifyContent="space-between" width="90%" mb={5}>
+        <Button
+          size={"md"}
+          colorScheme="telegram"
+          onClick={() => window.history.back()}
+        >
+          Back: Index More
+        </Button>
+        <Heading as="h1" size="lg">
+          OCR Search
+        </Heading>
+        <Box />
+      </Flex>
 
       <Box as="form" width="90%" onSubmit={handleSearchSubmit}>
         <FormControl width="90%" pb={5}>
