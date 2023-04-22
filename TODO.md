@@ -23,6 +23,7 @@
   - [x] Check if index DB already exists, if so provide an option to go straight to search
   - [x] Add option to index more documents
   - [x] Filter only PDF files
+  - [ ] For index found users, disable the "Start Search" button when they are indexing
 - [x] Refactor out index path setting
 - [x] Search Page
   - [x] Update search result continuously
@@ -35,7 +36,7 @@
 - Pre-Check Page
   - [x] Check if config.ini is present, if not create one and ask user to set up
   - [x] Fix race condition between state update and config save
-  - [ ] If config.ini is present, validate the binaries in the paths exist
+  - [x] If config.ini is present, validate that the binaries/folders in the paths exist
 - [x] Fix Blank page routing bug
 
 
@@ -47,6 +48,7 @@
 - [x] Figure out how to get environment variables to work for users
 - [ ] Add initial tests to verify OCR and Img extraction are working correctly with sample PDF and images and texts
 - [ ] Need better descriptions for the app landing page
+- [ ] Move third-party software installation instructions inside the precheck page for more clarity
  
 # Design
 
