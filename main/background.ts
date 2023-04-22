@@ -145,3 +145,13 @@ ipcMain.on("search-request", (event, searchQuery: SearchResult) => {
     }
   );
 });
+
+ipcMain.handle("read-pdf-file", async (event, filePath) => {
+  try {
+    const data = await fsp.readFile(filePath);
+    return new Uint8Array(data).buffer;
+  } catch (error) {
+    console.error("Error reading PDF file:", error);
+    return null;
+  }
+});

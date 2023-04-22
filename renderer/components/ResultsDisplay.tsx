@@ -7,7 +7,6 @@ import {
   Td,
   TableContainer,
   Tooltip,
-  Link,
   Button,
 } from "@chakra-ui/react";
 import React from "react";
@@ -41,7 +40,7 @@ const ResultsDisplay = ({ results, handleOnView }: Props) => {
             })
             .map((result: SearchResult) => {
               return (
-                <Tr>
+                <Tr key={`${result.id}${result.page}`}>
                   <Td>
                     <Tooltip label={result.docPath}>{result.docName}</Tooltip>
                   </Td>

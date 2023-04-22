@@ -13,11 +13,12 @@ import electron from "electron";
 import { useCallback, useEffect, useState } from "react";
 import { SearchResult } from "../services/types";
 import ResultsDisplay from "../components/ResultsDisplay";
+import PDFViewer from "../components/PDFViewer";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 
 const Search = () => {
-  const [currentOpenedPDF, setCurrentOpenedPDF] = useState("");
+  const [selectedResult, setSelectedResult] = useState<SearchResult>();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Array<SearchResult>>([]);
 
@@ -73,12 +74,7 @@ const Search = () => {
             Search Results
           </Text>
           <ResultsDisplay
-            handleOnView={(result: SearchResult) =>
-              console.log(
-                "TODO: Pass PDF to viewer to the right side for ",
-                result.docName
-              )
-            }
+            handleOnView={(result: SearchResult) => setSelectedResult(result)}
             results={searchResults}
           />
         </Box>
@@ -93,9 +89,14 @@ const Search = () => {
           <Text fontWeight="bold" mb={2}>
             PDF Viewer
           </Text>
-          {/* Embed PDF viewer here */}
+          {selectedResult && (
+            <PDFViewer
+              page={selectedResult.page}
+              pdfPath={selectedResult.docPath}
+            />
+          )}
           <Button
-            isDisabled={currentOpenedPDF.length === 0}
+            isDisabled={selectedResult === undefined}
             colorScheme="green"
             onClick={() => {}}
           >

@@ -11,10 +11,9 @@
 - [x] Add indexing system
   - [x] Add progress feedback
 - [x] Set index path to be at app path by default
-- [ ] Add search system
+- [x] Add search system
 - [ ] Add threading for multiple workers to index a directory
 - [ ] Add initial tests to verify OCR and Img Ext are working with sample PDF and images and texts
-
 
 ### Frontend
 
@@ -31,8 +30,14 @@
   - [x] Update search result continuously
   - [x] Display on a results table (Fix partial state issue)
   - [x] Tooltip on hover of the pdf document name
-  - [ ] Implement view to the side
-  - [ ] Spike: PDF Viewer
+  - [x] Implement view to the side
+  - [x] Spike: PDF Viewer
+  - [ ] Spike: Search result highlighting
+
+
+### Meta
+
+- [ ] Add setup instructions & Test if it works
 
 ## Design
 
