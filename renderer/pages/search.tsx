@@ -1,9 +1,7 @@
-// pages/main.js
 import {
   Box,
   Button,
   Divider,
-  extendTheme,
   Flex,
   FormControl,
   Heading,
@@ -11,36 +9,65 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
-const MainScreen = () => {
+const Search = () => {
+  const [currentOpenedPDF, setCurrentOpenedPDF] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // Implement your search logic here, e.g., call an API or filter data
+    console.log("Search", searchQuery);
+  };
+
   return (
-    <VStack minHeight="100vh" justifyContent="center" alignItems="center">
-      <Heading as="h1" size="xl" mb={5}>
-        PDF Search App
+    <VStack h="100vh" pt={5} alignItems="center">
+      <Heading as="h1" size="xl">
+        PDF Content Search
       </Heading>
-      <FormControl width="70%" mb={5}>
-        <Input type="text" placeholder="Search your indexed PDFs..." />
-      </FormControl>
-      <Flex width="100%" justifyContent="center">
-        <Box flexBasis="50%" mr={3}>
+
+      <Box as="form" width="90%" onSubmit={handleSearchSubmit}>
+        <FormControl width="90%" pb={5}>
+          <Flex>
+            <Input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              placeholder="Search your indexed PDFs..."
+              flexGrow={1} // Make the input grow to fill available space
+            />
+            <Button type="submit" colorScheme="teal" ml={2}>
+              Search
+            </Button>
+          </Flex>
+        </FormControl>
+      </Box>
+
+      <Flex width="100%" height="80vh" justifyContent="center">
+        <Box textAlign={"center"} flexBasis="50%" mx={3}>
           <Text fontWeight="bold" mb={2}>
-            Search Results:
+            Search Results
           </Text>
           {/* Display search results list here */}
         </Box>
-        <Divider orientation="vertical" height="100%" />
-        <Box flexBasis="50%" ml={3} position="relative">
+        <Divider
+          width="1px"
+          color="white"
+          borderColor={"white"}
+          orientation="vertical"
+          height="100%"
+        />
+        <Box textAlign={"center"} flexBasis="50%" ml={3}>
           <Text fontWeight="bold" mb={2}>
-            PDF Viewer:
+            PDF Viewer
           </Text>
           {/* Embed PDF viewer here */}
-          <Button
-            position="absolute"
-            bottom={0}
-            right={0}
-            colorScheme="blue"
-            onClick={() => {}}
-          >
+          <Button colorScheme="green" onClick={() => {}}>
             Open Original File
           </Button>
         </Box>
@@ -49,4 +76,4 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default Search;
