@@ -48,7 +48,7 @@ const Search = () => {
   return (
     <VStack h="100vh" pt={5} alignItems="center">
       <Heading as="h1" size="xl">
-        PDF Content Search
+        OCR Search
       </Heading>
 
       <Box as="form" width="90%" onSubmit={handleSearchSubmit}>
