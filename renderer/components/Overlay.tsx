@@ -7,10 +7,15 @@ import {
   Icon,
   Button,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 
-const Overlay = (props) => {
+type Props = {
+  link: string;
+};
+
+const Overlay = ({ link }: Props) => {
   return (
     <Box
       position="fixed"
@@ -37,7 +42,9 @@ const Overlay = (props) => {
               </Center>
             </Box>
             <Text color={"white"}>Indexing Completed!</Text>
-            <Button colorScheme="teal">Start Searching</Button>
+            <Link href={link}>
+              <Button colorScheme="teal">Start Searching</Button>
+            </Link>
           </VStack>
         </Center>
       </Flex>
