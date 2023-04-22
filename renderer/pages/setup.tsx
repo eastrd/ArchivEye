@@ -125,7 +125,11 @@ const SetupScreen = () => {
               _hover={{ textDecoration: "none" }}
               href={isProd ? `app://./search.html` : `/search`}
             >
-              <Button colorScheme="teal" width={"50%"}>
+              <Button
+                isDisabled={progressType === PgType.Indexing}
+                colorScheme="teal"
+                width={"50%"}
+              >
                 Start Search
               </Button>
             </Link>
