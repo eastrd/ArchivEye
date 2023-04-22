@@ -118,7 +118,7 @@ const SetupScreen = () => {
         {alreadyHasIndexDB && (
           <>
             <Text mt={5} mb={3}>
-              Since you've already indexed before, you can also
+              Index database found, you may also
             </Text>
             <Link _hover={{ textDecoration: "none" }} href="/search">
               <Button colorScheme="teal" width={"50%"}>

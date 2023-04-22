@@ -7,6 +7,7 @@ import {
   Heading,
   Input,
   Text,
+  Tooltip,
   VStack,
 } from "@chakra-ui/react";
 import electron from "electron";
@@ -105,14 +106,17 @@ const Search = () => {
               pdfPath={selectedResult.docPath}
             />
           )}
-          <Button
-            mt={3}
-            isDisabled={selectedResult === undefined}
-            colorScheme="green"
-            onClick={() => {}}
-          >
-            Open Original File
-          </Button>
+          <Tooltip label={"Coming soon!"}>
+            <Button
+              mt={3}
+              // isDisabled={selectedResult === undefined}
+              isDisabled={true}
+              colorScheme="green"
+              onClick={() => {}}
+            >
+              Open Original File
+            </Button>
+          </Tooltip>
         </Box>
       </Flex>
     </VStack>

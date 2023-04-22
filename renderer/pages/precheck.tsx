@@ -6,7 +6,7 @@ import {
   FormControl,
   Flex,
   FormLabel,
-  Text,
+  Link,
 } from "@chakra-ui/react";
 import DirectoryPicker from "../components/DirectoryPicker";
 import { Heading } from "@chakra-ui/react";
@@ -28,10 +28,17 @@ function PreCheck() {
             <FormLabel>{tessPath}</FormLabel>
             <DirectoryPicker
               handleOnClick={() => {
-                ipcRenderer.invoke("directory-pick").then((v) => {
-                  console.log("Got ", v);
-                  setTessPath(v);
-                });
+                ipcRenderer
+                  .invoke("directory-pick")
+                  .then((v) => {
+                    setTessPath(v);
+                  })
+                  .then(() =>
+                    ipcRenderer.send("save-config", {
+                      Tess: tessPath,
+                      Gs: gsPath,
+                    })
+                  );
               }}
               buttonText="Select"
               disabled={false}
@@ -40,11 +47,19 @@ function PreCheck() {
         </FormControl>
         <FormControl mb={3}>
           <Flex justifyContent="space-between" alignItems="center">
-            <FormLabel flexBasis={"50%"}>GhostScript Path</FormLabel>
+            <FormLabel flexBasis={"20%"}>GhostScript Path</FormLabel>
             <FormLabel>{gsPath}</FormLabel>
             <DirectoryPicker
               handleOnClick={() => {
-                ipcRenderer.invoke("directory-pick").then(setGsPath);
+                ipcRenderer
+                  .invoke("directory-pick")
+                  .then(setGsPath)
+                  .then(() =>
+                    ipcRenderer.send("save-config", {
+                      Tess: tessPath,
+                      Gs: gsPath,
+                    })
+                  );
               }}
               buttonText="Select"
               disabled={false}
@@ -52,18 +67,16 @@ function PreCheck() {
           </Flex>
         </FormControl>
         <Flex justifyContent={"end"}>
-          <Button
-            mt={10}
-            colorScheme="green"
-            alignSelf="flex-end"
-            isDisabled={tessPath.length === 0 || gsPath.length === 0}
-            onClick={() => {
-              console.log("Sending");
-              ipcRenderer.send("save-config", { Tess: tessPath, Gs: gsPath });
-            }}
-          >
-            Check Installations
-          </Button>
+          <Link _hover={{ textDecoration: "none" }} href="/setup">
+            <Button
+              mt={10}
+              colorScheme="green"
+              alignSelf="flex-end"
+              isDisabled={tessPath.length === 0 || gsPath.length === 0}
+            >
+              Check Installations
+            </Button>
+          </Link>
         </Flex>
       </Box>
     </VStack>

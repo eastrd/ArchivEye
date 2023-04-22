@@ -7,8 +7,6 @@
 
 ## Installation
 
----
-
 ### 1. Install Tesseract
 
 #### Windows
@@ -29,10 +27,13 @@
 
 ### 3. Tell ArchivEye the location of the above two
 
-- Open up `.env` file and modify the path to the installed locations of the above two programs accordingly
+- There will be a settings page when it is your first time using ArchivEye
+- Use the `Select` buttons for Tesseract and GhostScript:
+  - Select the directory where you have installed Tesseract, for example mine is `S:\Apps\Tesseract-OCR\`
+  - Select the directory where you have installed Ghostscript, for example mine is `S:\Apps\gs\gs10.01.1\`
+  - After that press `Check Installations` to proceed
 
 ---
-
 
 ## TODO
 
@@ -66,6 +67,9 @@
   - [x] Spike: PDF Viewer
   - [x] Pagination of search result display
   - [ ] Spike: Search result highlighting
+- Pre-Check Page:
+  - [x] Check if config.ini is present, if not create one and ask user to set up
+  - [ ] If config.ini is present, check if paths appointed exists and required binaries exist
 
 
 ### Meta
@@ -73,9 +77,10 @@
 - [ ] Add setup instructions & Test if it works
 - [x] Test Electron packaging
   - [x] Fix the shitty canvas bug
-- [ ] Figure out how to get environment variables to work for users
+- [x] Figure out how to get environment variables to work for users
 - [ ] Add initial tests to verify OCR and Img extraction are working correctly with sample PDF and images and texts
-
+- [ ] Need better descriptions for the app landing page
+ 
 ## Design
 
 ### Indexing System

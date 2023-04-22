@@ -190,6 +190,7 @@ ipcMain.on("save-config", (event, cfg: { Tess: string; Gs: string }) => {
       { section: "OCR" }
     )
   );
+  return;
 });
 
 ipcMain.handle("load-config", (event) => {
