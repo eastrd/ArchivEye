@@ -1,6 +1,6 @@
-appId: com.example.nextron
-productName: My Nextron App
-copyright: Copyright © 2018 Yoshihide Shiono
+appId: com.archiveye.eastrd
+productName: ArchivEye
+copyright: Copyright © 2023 Eastrd
 directories:
   output: dist
   buildResources: resources
