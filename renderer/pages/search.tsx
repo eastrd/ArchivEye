@@ -15,8 +15,10 @@ import { useCallback, useEffect, useState } from "react";
 import { SearchResult } from "../services/types";
 import ResultsDisplay from "../components/ResultsDisplay";
 import PDFViewer from "../components/PDFViewer";
+import Link from "next/link";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
+const isProd: boolean = process.env.NODE_ENV === "production";
 
 const Search = () => {
   const [selectedResult, setSelectedResult] = useState<SearchResult>();
@@ -49,13 +51,11 @@ const Search = () => {
   return (
     <VStack h="100vh" pt={5} alignItems="center">
       <Flex justifyContent="space-between" width="90%" mb={5}>
-        <Button
-          size={"md"}
-          colorScheme="telegram"
-          onClick={() => window.history.back()}
-        >
-          Back: Index More
-        </Button>
+        <Link href={isProd ? `app://./setup.html` : `/setup`}>
+          <Button size={"md"} colorScheme="telegram">
+            Back: Index More
+          </Button>
+        </Link>
         <Heading as="h1" size="lg">
           OCR Search
         </Heading>

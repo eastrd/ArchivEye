@@ -15,6 +15,7 @@ import Overlay from "../components/Overlay";
 import path from "path";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
+const isProd: boolean = process.env.NODE_ENV === "production";
 
 const randomWaitingPhrase = () => {
   return phrases[Math.floor(Math.random() * phrases.length)];
@@ -120,7 +121,10 @@ const SetupScreen = () => {
             <Text mt={5} mb={3}>
               Index database found, you may also
             </Text>
-            <Link _hover={{ textDecoration: "none" }} href="/search">
+            <Link
+              _hover={{ textDecoration: "none" }}
+              href={isProd ? `app://./search.html` : `/search`}
+            >
               <Button colorScheme="teal" width={"50%"}>
                 Start Search
               </Button>

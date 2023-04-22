@@ -2,12 +2,12 @@ import fsp from "fs/promises";
 import fs from "fs";
 import path from "path";
 
-export const getDir = (givenPath) => {
-  const stats = fs.statSync(givenPath);
-  if (stats.isFile()) {
-    return path.dirname(givenPath);
+export const getDir = (p) => {
+  // We want a proper folder to store configs, this function is intended for packaged electron app where it would always return app.asar as its path
+  if (path.basename(p) === "app.asar") {
+    return path.join(p, "..");
   }
-  return givenPath;
+  return p;
 };
 
 export const createFolderIfNotExists = async (folderPath) => {

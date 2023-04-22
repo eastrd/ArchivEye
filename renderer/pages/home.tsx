@@ -4,6 +4,8 @@ import { Button, Text, Heading, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { ipcRenderer } from "electron";
 
+const isProd: boolean = process.env.NODE_ENV === "production";
+
 function Home() {
   const [needInit, setNeedInit] = useState(true);
 
@@ -12,6 +14,8 @@ function Home() {
     ipcRenderer
       .invoke("load-config")
       .then((ifExists) => setNeedInit(!ifExists));
+
+    ipcRenderer.invoke("get-env").then((p) => console.log("AppDir: ", p));
   }, []);
 
   return (
@@ -33,11 +37,11 @@ function Home() {
         </Text>
 
         {needInit ? (
-          <Link href="/precheck">
+          <Link href={isProd ? "app://./precheck.html" : "/precheck"}>
             <Button colorScheme="blue">Get Started</Button>
           </Link>
         ) : (
-          <Link href="/setup">
+          <Link href={isProd ? "app://./setup.html" : "/setup"}>
             <Button colorScheme="blue">Enter</Button>
           </Link>
         )}

@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
+const isProd: boolean = process.env.NODE_ENV === "production";
+
 type Props = {
   link: string;
 };
@@ -42,7 +44,7 @@ const Overlay = ({ link }: Props) => {
               </Center>
             </Box>
             <Text color={"white"}>Indexing Completed!</Text>
-            <Link href={link}>
+            <Link href={isProd ? `app://./${link}.html` : `/${link}`}>
               <Button colorScheme="teal">Start Searching</Button>
             </Link>
           </VStack>

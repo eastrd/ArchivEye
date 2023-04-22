@@ -3,7 +3,6 @@ import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import path from "path";
 import {
-  appDir,
   createFolder,
   deleteFolder,
   parseIndexDB,
@@ -14,6 +13,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import {
   createFolderIfNotExists,
+  getDir,
   searchTextInFile,
 } from "../renderer/services/util";
 import { IndexRecord, SearchResult } from "../renderer/services/types";
@@ -23,7 +23,8 @@ import fs from "fs";
 import * as ini from "ini";
 
 let mainWindow: Electron.CrossProcessExports.BrowserWindow;
-const isProd: boolean = process.env.NODE_ENV === "production";
+export const isProd: boolean = process.env.NODE_ENV === "production";
+const appDir = getDir(app.getAppPath());
 
 if (isProd) {
   serve({ directory: "app" });
@@ -195,4 +196,8 @@ ipcMain.on("save-config", (event, cfg: { Tess: string; Gs: string }) => {
 
 ipcMain.handle("load-config", (event) => {
   return fs.existsSync(path.join(appDir, "config.ini"));
+});
+
+ipcMain.handle("get-env", (event) => {
+  return appDir;
 });

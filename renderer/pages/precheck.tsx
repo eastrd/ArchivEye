@@ -12,6 +12,8 @@ import DirectoryPicker from "../components/DirectoryPicker";
 import { Heading } from "@chakra-ui/react";
 import { ipcRenderer } from "electron";
 
+const isProd: boolean = process.env.NODE_ENV === "production";
+
 function PreCheck() {
   const [tessPath, setTessPath] = useState("");
   const [gsPath, setGsPath] = useState("");
@@ -28,17 +30,7 @@ function PreCheck() {
             <FormLabel>{tessPath}</FormLabel>
             <DirectoryPicker
               handleOnClick={() => {
-                ipcRenderer
-                  .invoke("directory-pick")
-                  .then((v) => {
-                    setTessPath(v);
-                  })
-                  .then(() =>
-                    ipcRenderer.send("save-config", {
-                      Tess: tessPath,
-                      Gs: gsPath,
-                    })
-                  );
+                ipcRenderer.invoke("directory-pick").then(setTessPath);
               }}
               buttonText="Select"
               disabled={false}
@@ -51,15 +43,7 @@ function PreCheck() {
             <FormLabel>{gsPath}</FormLabel>
             <DirectoryPicker
               handleOnClick={() => {
-                ipcRenderer
-                  .invoke("directory-pick")
-                  .then(setGsPath)
-                  .then(() =>
-                    ipcRenderer.send("save-config", {
-                      Tess: tessPath,
-                      Gs: gsPath,
-                    })
-                  );
+                ipcRenderer.invoke("directory-pick").then(setGsPath);
               }}
               buttonText="Select"
               disabled={false}
@@ -67,12 +51,21 @@ function PreCheck() {
           </Flex>
         </FormControl>
         <Flex justifyContent={"end"}>
-          <Link _hover={{ textDecoration: "none" }} href="/setup">
+          <Link
+            _hover={{ textDecoration: "none" }}
+            href={isProd ? `app://./setup.html` : `/setup`}
+          >
             <Button
               mt={10}
               colorScheme="green"
               alignSelf="flex-end"
               isDisabled={tessPath.length === 0 || gsPath.length === 0}
+              onClick={() =>
+                ipcRenderer.send("save-config", {
+                  Tess: tessPath,
+                  Gs: gsPath,
+                })
+              }
             >
               Check Installations
             </Button>
