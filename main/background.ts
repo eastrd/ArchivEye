@@ -112,6 +112,7 @@ ipcMain.handle("if-index-exists", (event) => {
 });
 
 ipcMain.handle("done-ocr", async () => {
+  ocrProgress = 0.0;
   return new Promise<void>((resolve) => {
     const checkProgress = () => {
       if (ocrProgress === 100) {
