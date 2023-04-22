@@ -1,5 +1,42 @@
 # ArchivEye
 
+## Introduction
+
+- TODO: Explain what ArchivEye does / problems it solves / who uses it
+- TODO: Screenshots / Gifs
+
+## Installation
+
+---
+
+### Windows
+
+### 1. Install Tesseract
+
+- Download and install the latest version 5.3.1 from [uni-mannheim](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe)
+
+### 2. Install GhostScript
+
+- Go to [this page](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases) and download and install according to your system platform
+
+### 3. Tell ArchivEye the location of the above two
+
+- Open up `.env` file and modify the path to the installed locations of the above two programs accordingly
+
+---
+
+### Mac
+
+- TODO
+
+---
+
+### Linux
+
+- Figure it out by yourself (Jokes, it's TODO)
+
+---
+
 ## TODO
 
 ### Backend
@@ -24,7 +61,7 @@
   - [x] Check if index DB already exists, if so provide an option to go straight to search
   - [x] Add option to index more documents
 - [x] Refactor out index path setting
-- [x] Search Page: Initial Layout 
+- [x] Search Page: Initial Layout
   - [x] Update search result continuously
   - [x] Display on a results table (Fix partial state issue)
   - [x] Tooltip on hover of the pdf document name
