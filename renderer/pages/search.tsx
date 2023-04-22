@@ -57,7 +57,7 @@ const Search = () => {
           </Button>
         </Link>
         <Heading as="h1" size="lg">
-          OCR Search
+          ArchivEye
         </Heading>
         <Box />
       </Flex>

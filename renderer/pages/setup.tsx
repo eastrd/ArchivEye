@@ -71,7 +71,7 @@ const SetupScreen = () => {
         PDF Documents Path
       </Heading>
       <DocsPicker
-        hintText="1. Click here or Drag the folder here"
+        hintText="Click here or Drag the folder here"
         label=""
         files={paths}
         setFiles={(paths: Array<string>) => {
@@ -109,9 +109,9 @@ const SetupScreen = () => {
           }}
         >
           {progressType === PgType.Indexing ? (
-            <Text as="s"> 2. INDEX EM ALL </Text>
+            <Text as="s"> Start Indexing </Text>
           ) : (
-            <Text> 2. INDEX EM ALL </Text>
+            <Text> Start Indexing </Text>
           )}
         </Button>
       </div>
