@@ -201,3 +201,23 @@ ipcMain.handle("load-config", (event) => {
 ipcMain.handle("get-env", (event) => {
   return appDir;
 });
+
+ipcMain.handle("check-env", async (event, cfg) => {
+  const { Tess, Gs } = cfg;
+
+  // Check if `tesseract.exe` exists in Tess
+  const tesseractExists = fs.existsSync(path.join(Tess, "tesseract.exe"));
+
+  // Check if folder `tessdata` exists in Tess
+  const tessdataExists = fs.existsSync(path.join(Tess, "tessdata"));
+
+  // Check if folder `bin` exists in Gs
+  const binExists = fs.existsSync(path.join(Gs, "bin"));
+
+  // Return the results
+  return {
+    TessExists: tesseractExists,
+    TessDataExists: tessdataExists,
+    GsBinExists: binExists,
+  };
+});
