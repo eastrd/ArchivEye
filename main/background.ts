@@ -5,13 +5,12 @@ import path from "path";
 import {
   CreateFolder,
   DeleteFolder,
-  DisplayEnvs,
   PDFToImgs,
-  SamplePDF,
   TessCMD,
   WriteOrAppendToFile,
 } from "./ocr";
 import { v4 as uuidv4 } from "uuid";
+import { createFolderIfNotExists } from "../renderer/services/util";
 
 let mainWindow: Electron.CrossProcessExports.BrowserWindow;
 const isProd: boolean = process.env.NODE_ENV === "production";
@@ -45,8 +44,14 @@ app.on("window-all-closed", () => {
 });
 
 // Let User select index db path
-let indexPath: string;
+const appPath: string = app.getAppPath();
+// Create `_index` folder if not exist
+const indexPath: string = path.join(appPath, "_index");
+createFolderIfNotExists(indexPath);
+
 let ocrProgress: number = 0;
+
+console.log("indexPath is ", indexPath);
 
 ipcMain.on("file-list", async (_event, paths) => {
   let counter = 0;
@@ -84,19 +89,6 @@ ipcMain.on("file-list", async (_event, paths) => {
 
     counter++;
     ocrProgress = (counter / paths.length) * 100;
-  }
-});
-
-ipcMain.handle("open-directory-dialog", async (event) => {
-  const result = await dialog.showOpenDialog(mainWindow, {
-    properties: ["openDirectory"],
-  });
-
-  if (!result.canceled) {
-    indexPath = result.filePaths[0];
-    return indexPath;
-  } else {
-    return null;
   }
 });
 

@@ -1,14 +1,5 @@
 // components/SetupScreen.js
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Progress,
-  Spinner,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Heading, Progress, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import DirectoryPicker from "../components/DirectoryPicker";
 import DocsPicker from "../components/DocsScanner";
@@ -39,7 +30,6 @@ const SetupScreen = () => {
       // Get OCR progress update via IPC bridge
       ipcRenderer.invoke("get-ocr-progress").then(setProgressPerc);
     }, 1000);
-
     return () => {
       clearInterval(interval);
     };
@@ -47,42 +37,28 @@ const SetupScreen = () => {
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
-
     if (progressType == PgType.Indexing) {
       intervalId = setInterval(() => {
         setWaitPhrase(randomWaitingPhrase());
       }, 4000);
     }
-
     return () => {
       clearInterval(intervalId);
     };
   }, [progressType]);
 
-  const handleFinishOCR = () => {
-    setProgressType(PgType.Complete);
-  };
-
   return (
     <VStack spacing={6} alignItems="left" minHeight="80vh" p={5}>
-      {progressType === PgType.Complete && <Overlay />}
+      {progressType === PgType.Complete && <Overlay link="/search" />}
       <Heading as="h1" size="xl">
         Setup
       </Heading>
-      <Heading as="h2" size="sm">
-        Index Database Path (One-time Only)
-      </Heading>
-      <DirectoryPicker
-        disabled={progressType === PgType.Indexing}
-        buttonText={"1. Choose folder to store Index data"}
-        ipcMessageType="open-directory-dialog"
-      />
 
       <Heading as="h2" size="sm">
         PDF Documents Path
       </Heading>
       <DocsPicker
-        hintText="2. Click here or Drag the folder here"
+        hintText="1. Click here or Drag the folder here"
         label=""
         files={files}
         setFiles={setFiles}
@@ -117,13 +93,15 @@ const SetupScreen = () => {
             ipcRenderer.send("file-list", paths);
             setProgressType(PgType.Indexing);
 
-            ipcRenderer.invoke("done-ocr").then(handleFinishOCR);
+            ipcRenderer.invoke("done-ocr").then(() => {
+              setProgressType(PgType.Complete);
+            });
           }}
         >
           {progressType === PgType.Indexing ? (
-            <Text as="s"> 3. INDEX EM ALL </Text>
+            <Text as="s"> 2. INDEX EM ALL </Text>
           ) : (
-            <Text> 3. INDEX EM ALL </Text>
+            <Text> 2. INDEX EM ALL </Text>
           )}
         </Button>
       </div>

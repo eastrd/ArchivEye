@@ -10,6 +10,7 @@
 
 - [x] Add indexing system
   - [x] Add progress feedback
+- [x] Set index path to be at app path by default
 - [ ] Add search system
 - [ ] Add threading for multiple workers to index a directory
 - [ ] Add initial tests to verify OCR and Img Ext are working with sample PDF and images and texts
@@ -22,7 +23,8 @@
   - [x] Cross out (1) button after selection, cross out (2) button after indexing starts
   - [x] Make both of buttons disabled after indexing starts
   - [x] Add relevant random wait phrases
-  - [ ] When OCR is completed, show an overlay with a button that proceeds to search page
+  - [x] When OCR is completed, show an overlay with a button that proceeds to search page
+- [x] Refactor out index path setting
 - [ ] Search Page
 - [ ] DARK THEME MYSELF PLZZZZ! IT'S HURTING MY OWN EYES
 
