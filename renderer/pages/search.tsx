@@ -106,6 +106,7 @@ const Search = () => {
             />
           )}
           <Button
+            mt={3}
             isDisabled={selectedResult === undefined}
             colorScheme="green"
             onClick={() => {}}

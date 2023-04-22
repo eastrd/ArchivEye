@@ -76,7 +76,7 @@ const SetupScreen = () => {
         setFiles={(paths: Array<string>) => {
           setPaths(paths.filter((p) => path.extname(p) === ".pdf"));
         }}
-        OnSubmitFiles={(paths) => {
+        onSubmitFiles={(paths) => {
           ipcRenderer.send("file-list", paths);
         }}
       />

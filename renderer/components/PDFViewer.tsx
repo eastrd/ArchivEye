@@ -42,7 +42,7 @@ const PDFViewer = ({ pdfPath, page }) => {
 
   return (
     <canvas
-      style={{ maxWidth: "90%", objectFit: "contain" }}
+      style={{ maxWidth: "95%", objectFit: "contain" }}
       ref={canvasRef}
     ></canvas>
   );
