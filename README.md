@@ -2,8 +2,23 @@
 
 ## Introduction
 
-- TODO: Explain what ArchivEye does / problems it solves / who uses it
-- TODO: Screenshots / Gifs
+ArchivEye is a powerful and intuitive GUI application designed to streamline the workflow of lawyers, OSINT researchers, journalists, and other professionals who frequently work with PDF documents. By leveraging Optical Character Recognition (OCR) technology, ArchivEye enables users to search through scanned and non-searchable PDF files with ease.
+
+ArchivEye focuses on accessibility, ensuring that even non-technical users can navigate and utilize the software effortlessly. It significantly reduces the time spent on manual tasks, such as opening multiple PDFs, reading, note taking manually, and cross-referencing information, by providing a unified interface for searching and indexing PDF documents.
+
+## Features
+
+- Simple one-time initialization for setting up the third-party OCR tool paths
+- OCR capabilities to make scanned PDF files searchable
+- A user-friendly search input for keyword-based searching across all indexed PDFs
+- Display of search results with corresponding PDF file and page number for easy reference
+- Support for indexing additional documents and paths, with search results spanning across all indexed locations, including historical ones
+- Dark-themed user interface to reduce eye strain and ensure a comfortable experience, especially for those working long hours or at night
+- ArchivEye aims to enhance productivity and provide a seamless, accessible solution for professionals in need of efficient PDF document management and searching
+
+## Screenshots
+
+- TODO: (I'm tired, will work on this part tomorrow)
 
 ## Installation
 
