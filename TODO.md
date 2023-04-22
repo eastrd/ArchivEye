@@ -4,11 +4,10 @@
 
 - [x] Add indexing system
   - [x] Add progress feedback
-  - [ ] Check and ignore already indexed documents
 - [x] Set index path to be at app path by default
 - [x] Add search system
-- [ ] Add threading for multiple workers to index a directory
 - [x] Fix app path bug
+- [ ] Add threading for multiple workers to index a directory
 
 ## Frontend
 
@@ -24,6 +23,7 @@
   - [x] Add option to index more documents
   - [x] Filter only PDF files
   - [x] For index found users, disable the "Start Search" button when they are indexing
+  - [x] Prompt a previous-index-db deletion confirmation if user wants to index on top of already indexed databases
 - [x] Refactor out index path setting
 - [x] Search Page
   - [x] Update search result continuously
@@ -47,9 +47,10 @@
 - [x] Figure out how to get environment variables to work for users
 - [x] Move third-party software installation instructions inside the precheck page for more clarity
 - [x] Add descriptions of what GhostScript and Tesseract does
+- [x] Indexing new data will delete old indexed data
 - [ ] Need better descriptions about ArchivEye on home page
-- [ ] Add option to clear index
 - [ ] Speed up indexing efficiency
+- [ ] Vision impaired accessibility
 
 # Design
 
