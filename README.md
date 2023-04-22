@@ -32,6 +32,7 @@
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
   - [x] Spike: PDF Viewer
+  - [x] Pagination of search result display
   - [ ] Spike: Search result highlighting
 
 
