@@ -18,6 +18,7 @@ import {
 import { IndexRecord, SearchResult } from "../renderer/services/types";
 import { INDEX_DB_FILENAME, SEP } from "../renderer/services/const";
 import fsp from "fs/promises";
+import fs from "fs";
 
 let mainWindow: Electron.CrossProcessExports.BrowserWindow;
 const isProd: boolean = process.env.NODE_ENV === "production";
@@ -101,6 +102,11 @@ ipcMain.on("file-list", async (_event, paths) => {
 
 ipcMain.handle("get-ocr-progress", (event) => {
   return ocrProgress;
+});
+
+ipcMain.handle("if-index-exists", (event) => {
+  const indexDBPath = path.join(indexPath, INDEX_DB_FILENAME);
+  return fs.existsSync(indexDBPath);
 });
 
 ipcMain.handle("done-ocr", async () => {

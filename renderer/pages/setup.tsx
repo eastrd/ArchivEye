@@ -1,5 +1,12 @@
 // components/SetupScreen.js
-import { Button, Heading, Progress, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  Link,
+  Progress,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import DocsPicker from "../components/DocsScanner";
 import electron from "electron";
@@ -23,6 +30,7 @@ const SetupScreen = () => {
   const [progressPerc, setProgressPerc] = useState(0.0);
   const [progressType, setProgressType] = useState<PgType>(PgType.Standby);
   const [waitPhrase, setWaitPhrase] = useState("");
+  const [alreadyHasIndexDB, setAlreadyHasIndexDB] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -32,6 +40,10 @@ const SetupScreen = () => {
     return () => {
       clearInterval(interval);
     };
+  }, []);
+
+  useEffect(() => {
+    ipcRenderer.invoke("if-index-exists").then(setAlreadyHasIndexDB);
   }, []);
 
   useEffect(() => {
@@ -103,6 +115,20 @@ const SetupScreen = () => {
             <Text> 2. INDEX EM ALL </Text>
           )}
         </Button>
+      </div>
+      <div style={{ textAlign: "center" }}>
+        {alreadyHasIndexDB && (
+          <>
+            <Text mt={5} mb={3}>
+              Since you've already indexed before, you can also
+            </Text>
+            <Link href="/search">
+              <Button colorScheme="teal" width={"50%"}>
+                Start Search
+              </Button>
+            </Link>
+          </>
+        )}
       </div>
     </VStack>
   );

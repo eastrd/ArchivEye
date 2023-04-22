@@ -87,7 +87,7 @@ const Search = () => {
         />
         <Box textAlign={"center"} flexBasis="50%" ml={3}>
           <Text fontWeight="bold" mb={2}>
-            PDF Viewer
+            PDF Viewer{selectedResult && `:${selectedResult.docName}`}
           </Text>
           {selectedResult && (
             <PDFViewer
