@@ -41,14 +41,16 @@
 
 - [x] Add indexing system
   - [x] Add progress feedback
+  - [ ] Check and ignore already indexed documents
 - [x] Set index path to be at app path by default
 - [x] Add search system
 - [ ] Add threading for multiple workers to index a directory
+- [x] Fix app path bug
 
 ### Frontend
 
 - [x] DARK THEME MYSELF PLZZZZ! IT'S HURTING MY OWN EYES
-  - [ ] Fix inconsistent dark mode
+  - [x] Fix inconsistent dark mode
 - [x] Setup Page: Index Folder & PDF Document Folder setter
   - [x] Receive backend's OCR progress and display it on a horizontal progress bar
   - [x] Cross out (1) button after selection, cross out (2) button after indexing starts
@@ -59,17 +61,19 @@
   - [x] Add option to index more documents
   - [x] Filter only PDF files
 - [x] Refactor out index path setting
-- [x] Search Page: Initial Layout
+- [x] Search Page
   - [x] Update search result continuously
   - [x] Display on a results table (Fix partial state issue)
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
   - [x] Spike: PDF Viewer
   - [x] Pagination of search result display
-  - [ ] Spike: Search result highlighting
-- Pre-Check Page:
+  - [ ] Search result highlighting
+- Pre-Check Page
   - [x] Check if config.ini is present, if not create one and ask user to set up
-  - [ ] If config.ini is present, check if paths appointed exists and required binaries exist
+  - [x] Fix race condition between state update and config save
+  - [ ] If config.ini is present, validate the binaries in the paths exist
+- [x] Fix Blank page routing bug
 
 
 ### Meta
