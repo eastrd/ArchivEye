@@ -107,17 +107,21 @@ export const createFolder = (folderPath: string): void => {
   }
 };
 
-export const deleteFolder = (folderPath: string): void => {
-  if (fs.existsSync(folderPath)) {
-    fs.readdirSync(folderPath).forEach((file) => {
-      const filePath = path.join(folderPath, file);
-      if (fs.lstatSync(filePath).isDirectory()) {
-        deleteFolder(filePath);
-      } else {
-        fs.unlinkSync(filePath);
-      }
-    });
-    fs.rmdirSync(folderPath);
+export const deletePathSync = (pathToDelete: string): void => {
+  if (fs.existsSync(pathToDelete)) {
+    if (fs.lstatSync(pathToDelete).isFile()) {
+      fs.unlinkSync(pathToDelete);
+    } else {
+      fs.readdirSync(pathToDelete).forEach((file) => {
+        const filePath = path.join(pathToDelete, file);
+        if (fs.lstatSync(filePath).isDirectory()) {
+          deletePathSync(filePath);
+        } else {
+          fs.unlinkSync(filePath);
+        }
+      });
+      fs.rmdirSync(pathToDelete);
+    }
   }
 };
 

@@ -1,11 +1,20 @@
 // components/SetupScreen.js
 import {
   Button,
+  Divider,
   Heading,
   Link,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Progress,
   Text,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import DocsPicker from "../components/DocsScanner";
@@ -33,6 +42,7 @@ const SetupScreen = () => {
   const [progressType, setProgressType] = useState<PgType>(PgType.Standby);
   const [waitPhrase, setWaitPhrase] = useState("");
   const [alreadyHasIndexDB, setAlreadyHasIndexDB] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,27 +109,57 @@ const SetupScreen = () => {
           colorScheme="blue"
           width={"50%"}
           onClick={() => {
-            console.log(paths);
-            ipcRenderer.send("file-list", paths);
-            setProgressType(PgType.Indexing);
-
-            ipcRenderer.invoke("done-ocr").then(() => {
-              setProgressType(PgType.Complete);
-            });
+            onOpen();
           }}
         >
-          {progressType === PgType.Indexing ? (
-            <Text as="s"> Start Indexing </Text>
-          ) : (
-            <Text> Start Indexing </Text>
-          )}
+          <Text> Start Indexing </Text>
         </Button>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Delete Your Previously Indexed Data?</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              Generating new indexed data will erase all of your previous index
+              database (if any). This will NOT affect your original PDF
+              documents.
+              <br />
+              <br />
+              Would you like to continue?
+            </ModalBody>
+
+            <ModalFooter>
+              <Button
+                colorScheme="blue"
+                mr={3}
+                onClick={() => {
+                  onClose();
+                  console.log(paths);
+                  ipcRenderer.invoke("delete-index").then(() => {
+                    ipcRenderer.send("file-list", paths);
+                    setProgressType(PgType.Indexing);
+
+                    ipcRenderer.invoke("done-ocr").then(() => {
+                      setProgressType(PgType.Complete);
+                    });
+                  });
+                }}
+              >
+                Proceed
+              </Button>
+              <Button onClick={onClose}>Cancel</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </div>
       <div style={{ textAlign: "center" }}>
         {alreadyHasIndexDB && (
           <>
-            <Text mt={5} mb={3}>
-              Index database found, you may also
+            <Text mt={7}>
+              Looks like you already have an database previously indexed
+            </Text>
+            <Text mt={3} mb={7}>
+              You could resume searching with the indexed documents
             </Text>
             <Link
               _hover={{ textDecoration: "none" }}

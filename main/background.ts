@@ -4,7 +4,7 @@ import { createWindow } from "./helpers";
 import path from "path";
 import {
   createFolder,
-  deleteFolder,
+  deletePathSync,
   parseIndexDB,
   pdfToImgs,
   tessCMD,
@@ -95,7 +95,7 @@ ipcMain.on("file-list", async (_event, paths) => {
       console.log(`OCR'd Page ${pageImgName}`);
     }
     console.log(`Finish OCR ${p}`);
-    deleteFolder(pageImgDir);
+    deletePathSync(pageImgDir);
 
     counter++;
     ocrProgress = (counter / paths.length) * 100;
@@ -221,4 +221,9 @@ ipcMain.handle("check-env", async (event, cfg) => {
     TessDataExists: tessdataExists,
     GsBinExists: binExists,
   };
+});
+
+ipcMain.handle("delete-index", (event) => {
+  deletePathSync(indexPath);
+  createFolderIfNotExists(indexPath);
 });
