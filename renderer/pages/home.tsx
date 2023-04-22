@@ -30,7 +30,7 @@ function Home() {
         minHeight="80vh"
       >
         <Heading as="h1" size="2xl">
-          Welcome to ArchivEye
+          {needInit && "Welcome To "} ArchivEye
         </Heading>
         <Text maxWidth="md">
           Easily search through your scanned PDF documents with OCR capabilities
@@ -42,7 +42,7 @@ function Home() {
           </Link>
         ) : (
           <Link href={isProd ? "app://./setup.html" : "/setup"}>
-            <Button colorScheme="blue">Enter</Button>
+            <Button colorScheme="blue">Welcome Back</Button>
           </Link>
         )}
       </VStack>
