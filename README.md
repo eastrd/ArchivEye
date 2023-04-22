@@ -56,6 +56,7 @@
   - [x] When OCR is completed, show an overlay with a button that proceeds to search page
   - [x] Check if index DB already exists, if so provide an option to go straight to search
   - [x] Add option to index more documents
+  - [x] Filter only PDF files
 - [x] Refactor out index path setting
 - [x] Search Page: Initial Layout
   - [x] Update search result continuously
@@ -70,8 +71,9 @@
 ### Meta
 
 - [ ] Add setup instructions & Test if it works
-- [ ] Test Electron packaging
-  - [ ] Fix the shitty canvas bug
+- [x] Test Electron packaging
+  - [x] Fix the shitty canvas bug
+- [ ] Figure out how to get environment variables to work for users
 - [ ] Add initial tests to verify OCR and Img extraction are working correctly with sample PDF and images and texts
 
 ## Design
