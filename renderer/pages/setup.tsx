@@ -12,6 +12,7 @@ import DocsPicker from "../components/DocsScanner";
 import electron from "electron";
 import { phrases } from "../services/const";
 import Overlay from "../components/Overlay";
+import path from "path";
 
 const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 
@@ -26,7 +27,7 @@ enum PgType {
 }
 
 const SetupScreen = () => {
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [paths, setPaths] = useState<Array<string>>([]);
   const [progressPerc, setProgressPerc] = useState(0.0);
   const [progressType, setProgressType] = useState<PgType>(PgType.Standby);
   const [waitPhrase, setWaitPhrase] = useState("");
@@ -71,11 +72,11 @@ const SetupScreen = () => {
       <DocsPicker
         hintText="1. Click here or Drag the folder here"
         label=""
-        files={files}
-        setFiles={setFiles}
-        OnSubmitFiles={(files) => {
-          const paths = Array.from(files).map((file) => file.path);
-          console.log(paths);
+        files={paths}
+        setFiles={(paths: Array<string>) => {
+          setPaths(paths.filter((p) => path.extname(p) === ".pdf"));
+        }}
+        OnSubmitFiles={(paths) => {
           ipcRenderer.send("file-list", paths);
         }}
       />
@@ -92,14 +93,11 @@ const SetupScreen = () => {
         </Text>
         <Text mb={3}> {waitPhrase} </Text>
         <Button
-          isDisabled={
-            !files || files.length === 0 || progressType === PgType.Indexing
-          }
+          isDisabled={paths.length === 0 || progressType === PgType.Indexing}
           type="submit"
           colorScheme="blue"
           width={"50%"}
           onClick={() => {
-            const paths = Array.from(files).map((file) => file.path);
             console.log(paths);
             ipcRenderer.send("file-list", paths);
             setProgressType(PgType.Indexing);

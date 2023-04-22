@@ -10,15 +10,15 @@ import {
 import React from "react";
 
 type Props = {
-  OnSubmitFiles: (files: FileList) => void;
+  onSubmitFiles: (files: Array<string>) => void;
   label: string | null;
   hintText: string;
-  files: FileList | null;
-  setFiles: React.Dispatch<SetStateAction<FileList>>;
+  files: Array<string>;
+  setFiles: React.Dispatch<SetStateAction<Array<string>>>;
 };
 
 const DocsPicker = ({
-  OnSubmitFiles: pnSubmitFiles,
+  onSubmitFiles,
   hintText,
   label,
   files,
@@ -28,7 +28,7 @@ const DocsPicker = ({
 
   const handlePathChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setFiles(event.target.files);
+      setFiles(Array.from(event.target.files).map((f) => f.path));
     }
   };
 
@@ -44,14 +44,14 @@ const DocsPicker = ({
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     if (event.dataTransfer.files) {
-      setFiles(event.dataTransfer.files);
+      setFiles(Array.from(event.dataTransfer.files).map((f) => f.path));
     }
     setDragging(false);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    pnSubmitFiles(files);
+    onSubmitFiles(files);
   };
 
   return (
