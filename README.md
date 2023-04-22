@@ -24,6 +24,8 @@ ArchivEye focuses on accessibility, ensuring that even non-technical users can n
 
 ### 1. Install Tesseract
 
+Tesseract is an integral part of ArchivEye, providing powerful OCR capabilities that converts extracted individual pages into searchable text.
+
 #### Windows
 
 - Download and install the latest version 5.3.1 from [uni-mannheim](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe)
@@ -37,6 +39,8 @@ ArchivEye focuses on accessibility, ensuring that even non-technical users can n
 - Tesseract is already included in most Linux distributions
 
 ### 2. Install GhostScript
+
+GhostScript is used to extract individual pages from the PDF file as images for Tesseract to OCR.
 
 - Go to [this page](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases) and download and install according to your system platform (For Windows Users, use `gs10011w64.exe`)
 
