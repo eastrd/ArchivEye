@@ -46,7 +46,6 @@
 - [x] Set index path to be at app path by default
 - [x] Add search system
 - [ ] Add threading for multiple workers to index a directory
-- [ ] Add initial tests to verify OCR and Img Ext are working with sample PDF and images and texts
 
 ### Frontend
 
@@ -74,6 +73,9 @@
 ### Meta
 
 - [ ] Add setup instructions & Test if it works
+- [ ] Test Electron packaging
+  - [ ] Fix the shitty canvas bug
+- [ ] Add initial tests to verify OCR and Img extraction are working correctly with sample PDF and images and texts
 
 ## Design
 
