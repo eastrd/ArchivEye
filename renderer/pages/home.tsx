@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { Button, Text, Heading, VStack } from "@chakra-ui/react";
 import Link from "next/link";
-
-/*
-Components:
-- Search bar component
-- Panel: Display search results
-- Panel to render selected PDF file
-- Input component: selecting directory to build PDF OCR caches
-*/
+import { ipcRenderer } from "electron";
 
 function Home() {
+  const [needInit, setNeedInit] = useState(true);
+
+  useEffect(() => {
+    // Check if config.ini exists, if exists then proceed to setup page, otherwise go to precheck page
+    ipcRenderer
+      .invoke("load-config")
+      .then((ifExists) => setNeedInit(!ifExists));
+  }, []);
+
   return (
     <React.Fragment>
       <Head>
@@ -29,9 +31,16 @@ function Home() {
         <Text maxWidth="md">
           Easily search through your scanned PDF documents with OCR capabilities
         </Text>
-        <Link href="/setup">
-          <Button colorScheme="blue">Get Started</Button>
-        </Link>
+
+        {needInit ? (
+          <Link href="/precheck">
+            <Button colorScheme="blue">Get Started</Button>
+          </Link>
+        ) : (
+          <Link href="/setup">
+            <Button colorScheme="blue">Enter</Button>
+          </Link>
+        )}
       </VStack>
     </React.Fragment>
   );

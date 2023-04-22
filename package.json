@@ -16,10 +16,12 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@types/ini": "^1.3.31",
     "dotenv": "^16.0.3",
     "electron-serve": "^1.1.0",
     "electron-store": "^8.1.0",
     "framer-motion": "^10.12.0",
+    "ini": "^4.1.0",
     "pdfjs-dist": "^3.5.141",
     "uuid": "^9.0.0"
   },

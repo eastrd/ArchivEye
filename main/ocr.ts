@@ -1,5 +1,4 @@
 import { exec } from "child_process";
-import dotenv from "dotenv";
 import { readdir } from "fs/promises";
 import path from "path";
 import { promisify } from "util";
@@ -7,9 +6,14 @@ import fs from "fs";
 import fsp from "fs/promises";
 import { SEP } from "../renderer/services/const";
 import { IndexRecord } from "../renderer/services/types";
+import * as ini from "ini";
+import { app } from "electron";
+import { getDir } from "../renderer/services/util";
 
-dotenv.config();
 export const execAsync = promisify(exec);
+export const appDir = getDir(app.getAppPath());
+
+console.log("AppDir: ", appDir);
 
 export const parseIndexDB = async (
   dbPath: string
@@ -43,10 +47,6 @@ export const execute = async (cmd: string) => {
   }
 };
 
-export const displayEnvs = () => {
-  console.log(process.env);
-};
-
 export const pdfToImgs = async (
   inPDF: string,
   outDir: string
@@ -62,10 +62,14 @@ export const pdfToImgs = async (
   }
 };
 
-export const gsCMD = async (inPDF: string, outDir: string): Promise<string> =>
-  execute(
-    `${process.env.GHOSTSCRIPT}/gswin64c.exe -sDEVICE=pngalpha -o "${outDir}/%04d.png" -r300 "${inPDF}"`
+export const gsCMD = async (inPDF: string, outDir: string): Promise<string> => {
+  const cfg = ini.parse(
+    fs.readFileSync(path.join(appDir, "config.ini"), "utf-8")
   );
+  return execute(
+    `${cfg.OCR.GHOSTSCRIPT}/gswin64c.exe -sDEVICE=pngalpha -o "${outDir}/%04d.png" -r300 "${inPDF}"`
+  );
+};
 
 export const tessCMD = async (
   inImg: string,
@@ -74,8 +78,12 @@ export const tessCMD = async (
   // Extract image name as output text name
   const baseName = path.basename(inImg);
 
+  const cfg = ini.parse(
+    fs.readFileSync(path.join(appDir, "config.ini"), "utf-8")
+  );
+
   return execute(
-    `${process.env.TESSERACT}/tesseract.exe "${inImg}" "${path.join(
+    `${cfg.OCR.TESSERACT}/tesseract.exe "${inImg}" "${path.join(
       outDir,
       baseName.split(".")[0]
     )}"`

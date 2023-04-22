@@ -1,8 +1,9 @@
-import { app, ipcMain, dialog } from "electron";
+import { app, dialog, ipcMain } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import path from "path";
 import {
+  appDir,
   createFolder,
   deleteFolder,
   parseIndexDB,
@@ -19,6 +20,7 @@ import { IndexRecord, SearchResult } from "../renderer/services/types";
 import { INDEX_DB_FILENAME, SEP } from "../renderer/services/const";
 import fsp from "fs/promises";
 import fs from "fs";
+import * as ini from "ini";
 
 let mainWindow: Electron.CrossProcessExports.BrowserWindow;
 const isProd: boolean = process.env.NODE_ENV === "production";
@@ -51,9 +53,8 @@ app.on("window-all-closed", () => {
   app.quit();
 });
 
-const appPath: string = app.getAppPath();
 // Create `_index` folder if not exist
-const indexPath: string = path.join(appPath, "_index");
+const indexPath: string = path.join(appDir, "_index");
 
 createFolderIfNotExists(indexPath);
 
@@ -160,4 +161,37 @@ ipcMain.handle("read-pdf-file", async (event, filePath) => {
     console.error("Error reading PDF file:", error);
     return null;
   }
+});
+
+ipcMain.handle("directory-pick", async (event) => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    properties: ["openDirectory"],
+  });
+  return !result.canceled ? result.filePaths[0] : "";
+});
+
+ipcMain.on("save-config", (event, cfg: { Tess: string; Gs: string }) => {
+  console.log("Received settings: ", cfg);
+  // Save config.ini
+  fs.writeFileSync(
+    path.join(appDir, "config.ini"),
+    /*
+      Example:
+        TESSDATA_PREFIX = S:\Apps\Tesseract-OCR\tessdata\
+        TESSERACT = S:\Apps\Tesseract-OCR\
+        GHOSTSCRIPT = S:\Apps\gs\gs10.01.1\bin\
+    */
+    ini.stringify(
+      {
+        TESSERACT: cfg.Tess,
+        TESSDATA_PREFIX: path.join(cfg.Tess, "tessdata/"),
+        GHOSTSCRIPT: path.join(cfg.Gs, "bin/"),
+      },
+      { section: "OCR" }
+    )
+  );
+});
+
+ipcMain.handle("load-config", (event) => {
+  return fs.existsSync(path.join(appDir, "config.ini"));
 });

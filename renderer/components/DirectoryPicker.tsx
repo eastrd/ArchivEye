@@ -6,31 +6,22 @@ const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 
 type Props = {
   buttonText: string;
-  ipcMessageType: string;
   disabled: boolean;
+  handleOnClick: () => void;
 };
 
-const DirectoryPicker = ({ buttonText, ipcMessageType, disabled }: Props) => {
+const DirectoryPicker = ({ buttonText, disabled, handleOnClick }: Props) => {
   const [selectedDirectory, setSelectedDirectory] = useState("");
-
-  const openDirectoryPicker = async () => {
-    const directoryPath = await ipcRenderer.invoke(ipcMessageType);
-    if (directoryPath) {
-      setSelectedDirectory(directoryPath);
-    }
-  };
 
   return (
     <div style={{ textAlign: "center" }}>
       {selectedDirectory && <p>Selected directory: {selectedDirectory}</p>}
       <Button
         type="submit"
-        mt={4}
         size="md"
         isDisabled={disabled}
-        width="50%"
         colorScheme="blue"
-        onClick={openDirectoryPicker}
+        onClick={handleOnClick}
       >
         {selectedDirectory ? (
           <Text as="s"> {buttonText}</Text>

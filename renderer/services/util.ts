@@ -1,4 +1,14 @@
 import fsp from "fs/promises";
+import fs from "fs";
+import path from "path";
+
+export const getDir = (givenPath) => {
+  const stats = fs.statSync(givenPath);
+  if (stats.isFile()) {
+    return path.dirname(givenPath);
+  }
+  return givenPath;
+};
 
 export const createFolderIfNotExists = async (folderPath) => {
   try {
