@@ -23,13 +23,13 @@ The software prioritizes ease of use, allowing even those without technical expe
 
 ### Prerequisites
 
-ArchivEye requires Tesseract and GhostScript to be installed on your system. 
+ArchivEye requires `Tesseract` and `GhostScript` to be installed on your system. 
 
 Follow the steps below to install these third-party tools
 
 #### Install Tesseract
 
-Tesseract is an integral part of ArchivEye, providing powerful OCR capabilities that convert extracted individual pages into searchable text.
+`Tesseract` is an integral part of ArchivEye, providing powerful OCR capabilities that convert extracted individual pages into searchable text.
 
 Download and install the latest version 5.3.1 from [uni-mannheim](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe)
 
@@ -49,13 +49,13 @@ Simply go to the [`Release`](https://github.com/eastrd/ArchivEye/releases/tag/v0
 
 ### First Time Setup
 
-During the first-time setup, you will need to configure the tool by specifying the paths to the installed Tesseract and GhostScript tools. Use the Select buttons for Tesseract and GhostScript:
+During the first-time setup, you will need to configure the tool by specifying the paths to the installed Tesseract and GhostScript tools. Use the Select buttons for `Tesseract` and `GhostScript`:
 
 - For `Tesseract`, select the folder `Tesseract-OCR`
 
 - For `GhostScript`, be sure to select the folder that is inside `gs` but not `gs` itself, in the time of releasing this version of ArchivEye, mine would be `gs10.01.1`
       
-Don't worry if you accidentally select the wrong paths, the `Validate & Proceed` button will validate the paths to make sure the paths are correct before we start indexing PDFs. It will also automatically run both the Ghostscript and Tesseract binaries on a dummy PDF to make sure these third party tools are working as expected
+Don't worry if you accidentally select the wrong paths, the `Validate & Proceed` button will validate the paths to make sure the paths are correct before we start indexing PDFs. It will also automatically run both the `Ghostscript` and `Tesseract` binaries on a dummy PDF to make sure these third party tools are working as expected
 
 ![First Time Setup Screenshot](/screenshots/precheck.png)
 
