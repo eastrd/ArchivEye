@@ -28,7 +28,8 @@ ArchivEye focuses on accessibility, ensuring that even non-technical users can n
 
 ### Search
 
-TODO
+![Search Screenshot](/screenshots/search.png)
+
 
 ## Third Party Tooling Installation - Windows Only (For Now)
 
