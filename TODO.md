@@ -51,7 +51,8 @@
 - [x] Indexing new data will delete old indexed data
 - [ ] Need better descriptions about ArchivEye on home page
 - [ ] Speed up indexing efficiency
-- [ ] Vision impaired accessibility
+- [x] Add tests to ensure both binaries are installed and can be executed, use sample image and pdf to validate these
+- [x] Add settings button that goes to precheck page to validate paths and binaries
 
 # Design
 
