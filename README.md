@@ -51,9 +51,9 @@ Simply go to the [`Release`](https://github.com/eastrd/ArchivEye/releases/tag/v0
 
 During the first-time setup, you will need to configure the tool by specifying the paths to the installed Tesseract and GhostScript tools. Use the Select buttons for Tesseract and GhostScript:
 
-For Tesseract, select the folder `Tesseract-OCR`
+- For `Tesseract`, select the folder `Tesseract-OCR`
 
-For GhostScript, be sure to select the folder that is inside `gs` but not `gs` itself, in the time of releasing this version of ArchivEye, mine would be `gs10.01.1`
+- For `GhostScript`, be sure to select the folder that is inside `gs` but not `gs` itself, in the time of releasing this version of ArchivEye, mine would be `gs10.01.1`
       
 Don't worry if you accidentally select the wrong paths, the `Validate & Proceed` button will validate the paths to make sure the paths are correct before we start indexing PDFs. It will also automatically run both the Ghostscript and Tesseract binaries on a dummy PDF to make sure these third party tools are working as expected
 
