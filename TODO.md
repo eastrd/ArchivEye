@@ -29,7 +29,7 @@
   - [x] Display on a results table (Fix partial state issue)
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
-  - [x] Spike: PDF Viewer
+  - [x] Implement PDF Viewer
     - [ ] Add color invert (My EYES!!)
     - [x] Add Zoom in / out (My EYES!)
   - [x] Pagination of search result display
@@ -38,6 +38,7 @@
   - [x] Check if config.ini is present, if not create one and ask user to set up
   - [x] Fix race condition between state update and config save
   - [x] If config.ini is present, validate that the binaries/folders in the paths exist
+  - [ ] Populate paths settings from config if exists
 - [x] Fix Blank page routing bug
 
 ## Meta
@@ -53,24 +54,3 @@
 - [ ] Speed up indexing efficiency
 - [x] Add tests to ensure both binaries are installed and can be executed, use sample image and pdf to validate these
 - [x] Add settings button that goes to precheck page to validate paths and binaries
-
-# Design
-
-## Indexing System
-
-- User select an empty directory to store index files
-- Index Logic
-  - For each PDF document
-    - Generate a UUID
-      - Append the "UUID to book path relation" to a master CSV
-      - Create a temp folder "IMG_{UUID}" for containing all images from the Ghostscript PDF
-      - Create a folder "{UUID}" for txt for each page from OCR'd images
-      - Delete temp folder for images
-
-- Search Logic
-  - Parse index db file into mapping relations
-  - When user enters a search term, look up all folders under the same directory as the index db file
-  - For any found records, append into a result list
-
-- Render logic
-  - For a given PDF file path and a page number, display it to the frontend
