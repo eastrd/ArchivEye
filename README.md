@@ -31,13 +31,13 @@ Follow the steps below to install these third-party tools
 
 Tesseract is an integral part of ArchivEye, providing powerful OCR capabilities that convert extracted individual pages into searchable text.
 
-Download and install the latest version 5.3.1 from uni-mannheim
+Download and install the latest version 5.3.1 from [uni-mannheim](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe)
 
 #### Install GhostScript
 
 GhostScript is used to extract individual pages from the PDF file as images for Tesseract to OCR.
 
-Go to this page and download and install gs10011w64.exe
+Go to [this page](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases) and download and install `gs10011w64.exe`
 
 ## Download ArchivEye
 
