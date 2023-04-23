@@ -97,7 +97,7 @@ To display search results on a per-page basis, we store per-page text files and 
 
 This process involves scanning each folder named by the UUID of the PDF document and searching through each text file to return the page number associated with its PDF document.
 
-### Limitations
+## Limitations
 
 - OCR can be slow, particularly for PDF documents with hundreds of pages. Processing time may vary depending on your PC hardware specifications. This can be resolved by utilizing multithreading.
 - It only supports English language for now due to time constraint.
