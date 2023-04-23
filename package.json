@@ -10,6 +10,14 @@
     "build": "nextron build",
     "postinstall": "electron-builder install-app-deps"
   },
+  "build": {
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets"
+      }
+    ]
+  },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/icons": "^2.0.18",

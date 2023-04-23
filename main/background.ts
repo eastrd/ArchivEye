@@ -6,6 +6,7 @@ import {
   createFolder,
   deletePathSync,
   getSubstringWithContext,
+  gsCMD,
   parseIndexDB,
   pdfToImgs,
   tessCMD,
@@ -173,7 +174,7 @@ ipcMain.handle("directory-pick", async (event) => {
   return !result.canceled ? result.filePaths[0] : "";
 });
 
-ipcMain.on("save-config", (event, cfg: { Tess: string; Gs: string }) => {
+ipcMain.handle("save-config", (event, cfg: { Tess: string; Gs: string }) => {
   console.log("Received settings: ", cfg);
   // Save config.ini
   fs.writeFileSync(
@@ -206,17 +207,12 @@ ipcMain.handle("get-env", (event) => {
 
 ipcMain.handle("check-env", async (event, cfg) => {
   const { Tess, Gs } = cfg;
-
   // Check if `tesseract.exe` exists in Tess
   const tesseractExists = fs.existsSync(path.join(Tess, "tesseract.exe"));
-
   // Check if folder `tessdata` exists in Tess
   const tessdataExists = fs.existsSync(path.join(Tess, "tessdata"));
-
   // Check if folder `bin` exists in Gs
   const binExists = fs.existsSync(path.join(Gs, "bin"));
-
-  // Return the results
   return {
     TessExists: tesseractExists,
     TessDataExists: tessdataExists,
@@ -238,3 +234,74 @@ ipcMain.handle(
     return getSubstringWithContext(pagePath, searchQuery, contextRange);
   }
 );
+
+ipcMain.handle("test-ocr", async (event) => {
+  try {
+    const result = await testOCR();
+    return result;
+  } catch (error) {
+    return error;
+  }
+});
+
+function testOCR() {
+  return new Promise((resolve, reject) => {
+    const pdfPath = getTestPDFFilePath("sample.pdf");
+    const testPath = path.join(appDir, "tests");
+
+    // Run ghostscript command to ensure image extraction is working
+    createFolderIfNotExists(testPath)
+      .then(() => gsCMD(pdfPath, testPath))
+      .then(() => {
+        const numImages = getNumberOfFiles(testPath);
+        // Check if test directory contain exactly 2 images (2 pages)
+        if (numImages !== 2) {
+          deletePathSync(testPath);
+          reject({
+            error: true,
+            reason: `Ghostscript error: number of image mismatch, expected 2 images extracted but got ${numImages}`,
+          });
+        }
+
+        const pngPath = path.join(testPath, "0001.png");
+        return tessCMD(pngPath, testPath);
+      })
+      .then(() => {
+        // Check if 0001.txt exists
+        const ocrTxtPath = path.join(testPath, "0001.txt");
+        if (!fs.existsSync(ocrTxtPath)) {
+          deletePathSync(testPath);
+          reject({
+            error: true,
+            reason: `Tesseract error: 0001.txt does not exist`,
+          });
+        }
+        deletePathSync(testPath);
+        resolve({
+          error: false,
+          reason: "",
+        });
+      })
+      .catch((err) => {
+        deletePathSync(testPath);
+        reject({
+          error: true,
+          reason: `An error occurred during the OCR test: ${err.message}`,
+        });
+      });
+  });
+}
+
+const getNumberOfFiles = (directoryPath: string) => {
+  const files = fs.readdirSync(directoryPath);
+  return files.length;
+};
+
+const getTestPDFFilePath = (filename: string) => {
+  const isDev = process.env.NODE_ENV === "development";
+  if (isDev) {
+    return path.join(__dirname, "..", "assets", filename);
+  } else {
+    return path.join(app.getAppPath(), "..", "assets", filename);
+  }
+};

@@ -37,6 +37,7 @@ export const parseIndexDB = async (
 
 export const execute = async (cmd: string) => {
   try {
+    console.log("Executing command ", cmd);
     const { stdout, stderr } = await execAsync(cmd);
     if (stderr) {
       throw new Error(`Error: ${stderr}`);

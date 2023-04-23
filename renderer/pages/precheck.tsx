@@ -6,7 +6,6 @@ import {
   FormControl,
   Flex,
   FormLabel,
-  Link,
   useToast,
 } from "@chakra-ui/react";
 import DirectoryPicker from "../components/DirectoryPicker";
@@ -21,8 +20,9 @@ function PreCheck() {
 
   const [tessPath, setTessPath] = useState("");
   const [gsPath, setGsPath] = useState("");
+  const [isValidating, setIsValidating] = useState(false);
 
-  const makeToast = (title: string, description: string) => {
+  const makeErrorToast = (title: string, description: string) => {
     toast({
       title,
       description,
@@ -48,7 +48,7 @@ function PreCheck() {
                 ipcRenderer.invoke("directory-pick").then(setTessPath);
               }}
               buttonText="Select"
-              disabled={false}
+              disabled={isValidating}
             />
           </Flex>
         </FormControl>
@@ -61,7 +61,7 @@ function PreCheck() {
                 ipcRenderer.invoke("directory-pick").then(setGsPath);
               }}
               buttonText="Select"
-              disabled={false}
+              disabled={isValidating}
             />
           </Flex>
         </FormControl>
@@ -70,7 +70,9 @@ function PreCheck() {
             mt={10}
             colorScheme="green"
             alignSelf="flex-end"
-            isDisabled={tessPath.length === 0 || gsPath.length === 0}
+            isDisabled={
+              tessPath.length === 0 || gsPath.length === 0 || isValidating
+            }
             onClick={() =>
               ipcRenderer
                 .invoke("check-env", {
@@ -83,30 +85,50 @@ function PreCheck() {
                     TessDataExists: Boolean;
                     GsBinExists: Boolean;
                   }) => {
+                    setIsValidating(true);
                     if (!res.TessDataExists || !res.TessExists) {
-                      makeToast(
+                      makeErrorToast(
                         "Wrong Tesseract Path",
                         "Unable to find `tesseract.exe` in your provided Tesseract path above, please double check you have installed Tesseract on your system and have selected its root path"
                       );
+                      setIsValidating(false);
                     } else if (!res.GsBinExists) {
-                      makeToast(
+                      makeErrorToast(
                         "Wrong GhostScript Path",
                         "Unable to find the `bin` folder in your provided GhostScript path above, please double check you have installed GhostScript on your system and have selected its root path"
                       );
+                      setIsValidating(false);
                     } else {
-                      ipcRenderer.send("save-config", {
-                        Tess: tessPath,
-                        Gs: gsPath,
-                      });
-                      window.location.href = isProd
-                        ? `app://./setup.html`
-                        : `/setup`;
+                      ipcRenderer
+                        .invoke("save-config", {
+                          Tess: tessPath,
+                          Gs: gsPath,
+                        })
+                        .then(() => {
+                          ipcRenderer
+                            .invoke("test-ocr")
+                            .then((res: { error: boolean; reason: string }) => {
+                              if (res.error) {
+                                makeErrorToast(
+                                  "There's an issue when testing if OCR works",
+                                  res.reason
+                                );
+                              } else {
+                                window.location.href = isProd
+                                  ? `app://./setup.html`
+                                  : `/setup`;
+                              }
+                              setIsValidating(false);
+                            });
+                        });
                     }
                   }
                 )
             }
           >
-            Validate & Proceed
+            {isValidating
+              ? "Validating... Please Wait..."
+              : "Validate & Proceed"}
           </Button>
         </Flex>
       </Box>
