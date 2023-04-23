@@ -151,21 +151,27 @@ export const getSubstringWithContext = (
   wordRange: number
 ) => {
   const fileContent = fs.readFileSync(filePath, "utf-8");
-  const searchStringIndex = fileContent.indexOf(searchString);
+  const searchStringIndex = fileContent
+    .toLowerCase()
+    .indexOf(searchString.toLowerCase());
 
   if (searchStringIndex === -1) {
     return { chunk: "Substring not found.", index: -1 };
   }
 
   const words = fileContent.split(/\s+/);
-  const wordIndex = words.findIndex((word) => word.includes(searchString));
+  const wordIndex = words.findIndex((word) =>
+    word.toLowerCase().includes(searchString.toLowerCase())
+  );
 
   const startWordIndex = Math.max(0, wordIndex - wordRange);
   const endWordIndex = Math.min(words.length, wordIndex + 1 + wordRange);
 
   const contextWords = words.slice(startWordIndex, endWordIndex);
   const textChunk = contextWords.join(" ");
-  const substringIndexInChunk = textChunk.indexOf(searchString);
+  const substringIndexInChunk = textChunk
+    .toLowerCase()
+    .indexOf(searchString.toLowerCase());
 
   return { chunk: textChunk, index: substringIndexInChunk };
 };
