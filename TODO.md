@@ -32,7 +32,7 @@
   - [x] Spike: PDF Viewer
     - [ ] Add color invert (My EYES!)
   - [x] Pagination of search result display
-  - [ ] Show text with highlights of where the search query appears
+  - [x] Show text with highlights of where the search query appears
 - Pre-Check Page
   - [x] Check if config.ini is present, if not create one and ask user to set up
   - [x] Fix race condition between state update and config save

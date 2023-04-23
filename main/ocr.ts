@@ -143,3 +143,28 @@ export const findStrPercByLines = (filePath: string, searchString: string) => {
   const percentagePosition = (newlinesBeforeSearchString / totalNewlines) * 100;
   return percentagePosition;
 };
+
+export const getSubstringWithContext = (
+  filePath: string,
+  searchString: string,
+  wordRange: number
+) => {
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const searchStringIndex = fileContent.indexOf(searchString);
+
+  if (searchStringIndex === -1) {
+    return { chunk: "Substring not found.", index: -1 };
+  }
+
+  const words = fileContent.split(/\s+/);
+  const wordIndex = words.findIndex((word) => word.includes(searchString));
+
+  const startWordIndex = Math.max(0, wordIndex - wordRange);
+  const endWordIndex = Math.min(words.length, wordIndex + 1 + wordRange);
+
+  const contextWords = words.slice(startWordIndex, endWordIndex);
+  const textChunk = contextWords.join(" ");
+  const substringIndexInChunk = textChunk.indexOf(searchString);
+
+  return { chunk: textChunk, index: substringIndexInChunk };
+};

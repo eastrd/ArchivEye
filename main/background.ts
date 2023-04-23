@@ -5,7 +5,7 @@ import path from "path";
 import {
   createFolder,
   deletePathSync,
-  findStrPercByLines,
+  getSubstringWithContext,
   parseIndexDB,
   pdfToImgs,
   tessCMD,
@@ -37,7 +37,7 @@ if (isProd) {
   await app.whenReady();
 
   mainWindow = createWindow("main", {
-    width: 1000,
+    width: 1100,
     height: 1000,
     autoHideMenuBar: true,
   });
@@ -229,12 +229,12 @@ ipcMain.handle("delete-index", (event) => {
   createFolderIfNotExists(indexPath);
 });
 
-// ipcMain.handle(
-//   "in-page-text-search",
-//   (event, result: SearchResult, searchQuery: string) => {
-//     const { docPath, id, page } = result;
-//     const pageFilename = page.toString().padStart(4, "0") + ".txt";
-//     const pagePath = path.join(indexPath, id, pageFilename);
-//     return findStrPercByLines(pagePath, searchQuery);
-//   }
-// );
+ipcMain.handle(
+  "in-page-text-search",
+  (event, result: SearchResult, searchQuery: string, contextRange: number) => {
+    const { id, page } = result;
+    const pageFilename = page.toString().padStart(4, "0") + ".txt";
+    const pagePath = path.join(indexPath, id, pageFilename);
+    return getSubstringWithContext(pagePath, searchQuery, contextRange);
+  }
+);

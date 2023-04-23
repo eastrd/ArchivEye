@@ -5,12 +5,10 @@ import { Box, Button } from "@chakra-ui/react";
 type Props = {
   pdfPath: string;
   page: number;
-  highlightPortion: number;
 };
 
-const PDFViewer = ({ pdfPath, page, highlightPortion }) => {
+const PDFViewer = ({ pdfPath, page }) => {
   const pdfCanvasRef = useRef<HTMLCanvasElement>(null);
-  const highlightCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // const [invertColors, setInvertColors] = useState(true);
 
@@ -21,13 +19,6 @@ const PDFViewer = ({ pdfPath, page, highlightPortion }) => {
   // useEffect(() => {
   //   applyInvertColors();
   // }, [invertColors]);
-
-  // Draw a rectangular highlight on the canvas
-  const drawHighlight = (canvasContext, position, width, height) => {
-    const { x, y } = position;
-    canvasContext.fillStyle = "rgba(255, 255, 0, 0.3)"; // Set the fill style to a transparent yellow
-    canvasContext.fillRect(x, y, width, height);
-  };
 
   // const applyInvertColors = () => {
   //   console.log("apply invert!");
@@ -73,33 +64,10 @@ const PDFViewer = ({ pdfPath, page, highlightPortion }) => {
         // Render PDF page into canvas context.
         const renderContext = { canvasContext, viewport };
         await pageObj.render(renderContext);
-
-        // Set up the highlight canvas with the same dimensions as the PDF canvas
-        const highlightCanvas = highlightCanvasRef.current;
-        const highlightCanvasContext = highlightCanvas.getContext("2d");
-        highlightCanvas.height = viewport.height;
-        highlightCanvas.width = viewport.width;
-
-        // Calculate the highlight position, width, and height as a percentage of the canvas dimensions
-        const highlightPosition = {
-          x: 0, // 20% from the left
-          y: (viewport.height * highlightPortion) / 100, // 20% from the top
-        };
-        const highlightWidth = viewport.width;
-        const highlightHeight = (viewport.height * 10) / 100; // 20% of the canvas height
-
-        // Call the drawHighlight function with the calculated values
-        // drawHighlight(
-        //   highlightCanvasContext,
-        //   highlightPosition,
-        //   highlightWidth,
-        //   highlightHeight
-        // );
       } else {
         console.error("Error loading PDF file");
       }
     })();
-    // }, [pdfPath, page, highlightPortion]);
   }, [pdfPath, page]);
 
   return (
@@ -107,22 +75,12 @@ const PDFViewer = ({ pdfPath, page, highlightPortion }) => {
       {/* <Button onClick={toggleInvertColors}>Invert Color</Button> */}
       <canvas
         style={{
-          maxWidth: "45%",
+          maxWidth: "47%",
           objectFit: "contain",
           position: "absolute",
           zIndex: 1,
         }}
         ref={pdfCanvasRef}
-      ></canvas>
-
-      <canvas
-        style={{
-          width: "45%",
-          objectFit: "contain",
-          position: "absolute",
-          zIndex: 2,
-        }}
-        ref={highlightCanvasRef}
       ></canvas>
     </Box>
   );

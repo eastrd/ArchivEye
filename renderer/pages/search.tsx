@@ -5,6 +5,7 @@ import {
   Flex,
   FormControl,
   Heading,
+  Highlight,
   Input,
   Text,
   Tooltip,
@@ -21,13 +22,10 @@ const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 const isProd: boolean = process.env.NODE_ENV === "production";
 
 const Search = () => {
-  const [
-    selectedResultHighlightProportion,
-    setSelectedResultHighlightProportion,
-  ] = useState(0);
   const [selectedResult, setSelectedResult] = useState<SearchResult>();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Array<SearchResult>>([]);
+  const [resultContext, setResultContext] = useState("");
 
   // Prevent stale search results being used
   const handleSearchResult = useCallback((event, result: SearchResult) => {
@@ -49,6 +47,10 @@ const Search = () => {
     e.preventDefault();
     setSearchResults([]);
     console.log("[+] Search", searchQuery);
+    // Reset PDF viewer and context UI
+    setResultContext("");
+    setSelectedResult(null);
+
     ipcRenderer.send("search-request", searchQuery);
   };
 
@@ -91,16 +93,28 @@ const Search = () => {
           <ResultsDisplay
             handleOnView={(result: SearchResult) => {
               setSelectedResult(result);
-              // ipcRenderer
-              //   .invoke("in-page-text-search", result, searchQuery)
-              //   .then((highlightRatio) => {
-              //     if (highlightRatio !== -1) {
-              //       setSelectedResultHighlightProportion(highlightRatio - 10);
-              //     }
-              //   });
+
+              ipcRenderer
+                .invoke("in-page-text-search", result, searchQuery, 40)
+                .then((res: { chunk: string; index: number }) => {
+                  setResultContext(res.chunk);
+                });
             }}
             results={searchResults}
           />
+          {resultContext && (
+            <>
+              <Heading size="md" pt={6}>
+                Context
+              </Heading>
+              <Text pt={1} textAlign={"left"} fontSize={"xl"}>
+                <Highlight
+                  styles={{ color: "yellow" }}
+                  query={searchQuery}
+                >{`${resultContext}`}</Highlight>
+              </Text>
+            </>
+          )}
         </Box>
         <Divider
           width="1px"
@@ -115,22 +129,10 @@ const Search = () => {
           </Text>
           {selectedResult && (
             <PDFViewer
-              highlightPortion={selectedResultHighlightProportion}
               page={selectedResult.page}
               pdfPath={selectedResult.docPath}
             />
           )}
-          <Tooltip label={"Coming soon!"}>
-            <Button
-              mt={3}
-              // isDisabled={selectedResult === undefined}
-              isDisabled={true}
-              colorScheme="green"
-              onClick={() => {}}
-            >
-              Open Original File
-            </Button>
-          </Tooltip>
         </Box>
       </Flex>
     </VStack>
