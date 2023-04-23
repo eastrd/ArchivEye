@@ -1,4 +1,7 @@
+
 # ArchivEye
+
+![logo](/resources/icon.ico)
 
 ## Team Members
 
@@ -6,7 +9,7 @@
 - [ATroubledMaker](https://ipyt.info/)
 - [deltagear](https://github.com/michaelgailling/) 
 
-## Tool Description
+## Description
 
 ArchivEye is a completely offline PDF OCR tool designed to protect the privacy and confidentiality of sensitive documents.
 
@@ -38,7 +41,7 @@ GhostScript is used to extract individual pages from the PDF file as images for 
 
 Go to this page and download and install gs10011w64.exe
 
-## ArchivEye Installation
+## Download ArchivEye
 
 Simply go to the `Release` section of this Github page and download the `.exe` file, double click and it will install automatically
 
