@@ -30,7 +30,8 @@
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
   - [x] Spike: PDF Viewer
-    - [ ] Add color invert (My EYES!)
+    - [ ] Add color invert (My EYES!!)
+    - [x] Add Zoom in / out (My EYES!)
   - [x] Pagination of search result display
   - [x] Show text with highlights of where the search query appears
 - Pre-Check Page
