@@ -21,6 +21,10 @@ const ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
 const isProd: boolean = process.env.NODE_ENV === "production";
 
 const Search = () => {
+  const [
+    selectedResultHighlightProportion,
+    setSelectedResultHighlightProportion,
+  ] = useState(0);
   const [selectedResult, setSelectedResult] = useState<SearchResult>();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Array<SearchResult>>([]);
@@ -85,7 +89,16 @@ const Search = () => {
             Search Results
           </Text>
           <ResultsDisplay
-            handleOnView={(result: SearchResult) => setSelectedResult(result)}
+            handleOnView={(result: SearchResult) => {
+              setSelectedResult(result);
+              // ipcRenderer
+              //   .invoke("in-page-text-search", result, searchQuery)
+              //   .then((highlightRatio) => {
+              //     if (highlightRatio !== -1) {
+              //       setSelectedResultHighlightProportion(highlightRatio - 10);
+              //     }
+              //   });
+            }}
             results={searchResults}
           />
         </Box>
@@ -98,10 +111,11 @@ const Search = () => {
         />
         <Box textAlign={"center"} flexBasis="50%" ml={3}>
           <Text fontWeight="bold" mb={2}>
-            PDF Viewer{selectedResult && `:${selectedResult.docName}`}
+            PDF Viewer{selectedResult && `: ${selectedResult.docName}`}
           </Text>
           {selectedResult && (
             <PDFViewer
+              highlightPortion={selectedResultHighlightProportion}
               page={selectedResult.page}
               pdfPath={selectedResult.docPath}
             />

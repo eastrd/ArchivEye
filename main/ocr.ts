@@ -125,15 +125,21 @@ export const deletePathSync = (pathToDelete: string): void => {
   }
 };
 
-/*
-Prerequisites:
-- Install Tesseract
-- Install Ghostscript
-- Set 3 envs in .env
-- Environment variable TESSDATA_PREFIX set to tesseract root directory 
-    if using old version, otherwise set to tessdata directory
+// Deprecated and not used
+export const findStrPercByLines = (filePath: string, searchString: string) => {
+  const fileContent = fs.readFileSync(filePath, "utf-8").toLowerCase();
+  const searchStringIndex = fileContent.indexOf(searchString.toLowerCase());
+  if (searchStringIndex === -1) {
+    return -1;
+  }
+  const totalNewlines = (fileContent.match(/\n/g) || []).length;
+  const newlinesBeforeSearchString = (
+    fileContent.slice(0, searchStringIndex).match(/\n/g) || []
+  ).length;
 
-PDF to invididual images, then Image to OCR Text:
-    .\tesseract.exe "S:\Apps\gs\gs10.01.1\bin\a\output-001.png" output-001 -c preserve_interword_spaces=1 -l eng
-
-*/
+  if (totalNewlines === 0) {
+    return 0;
+  }
+  const percentagePosition = (newlinesBeforeSearchString / totalNewlines) * 100;
+  return percentagePosition;
+};

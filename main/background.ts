@@ -5,6 +5,7 @@ import path from "path";
 import {
   createFolder,
   deletePathSync,
+  findStrPercByLines,
   parseIndexDB,
   pdfToImgs,
   tessCMD,
@@ -227,3 +228,13 @@ ipcMain.handle("delete-index", (event) => {
   deletePathSync(indexPath);
   createFolderIfNotExists(indexPath);
 });
+
+// ipcMain.handle(
+//   "in-page-text-search",
+//   (event, result: SearchResult, searchQuery: string) => {
+//     const { docPath, id, page } = result;
+//     const pageFilename = page.toString().padStart(4, "0") + ".txt";
+//     const pagePath = path.join(indexPath, id, pageFilename);
+//     return findStrPercByLines(pagePath, searchQuery);
+//   }
+// );
