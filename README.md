@@ -1,7 +1,7 @@
 
 # ArchivEye
 
-![logo](/resources/icon.ico)
+![logo](/renderer/public/images/logo.png|width=50)
 
 ## Team Members
 
