@@ -7,38 +7,8 @@ type Props = {
   page: number;
 };
 
-const PDFViewer = ({ pdfPath, page }) => {
+const PDFViewer = ({ pdfPath, page }: Props) => {
   const pdfCanvasRef = useRef<HTMLCanvasElement>(null);
-
-  // const [invertColors, setInvertColors] = useState(true);
-
-  // const toggleInvertColors = () => {
-  //   setInvertColors(!invertColors);
-  // };
-
-  // useEffect(() => {
-  //   applyInvertColors();
-  // }, [invertColors]);
-
-  // const applyInvertColors = () => {
-  //   console.log("apply invert!");
-  //   if (invertColors && pdfCanvasRef.current) {
-  //     const canvas = pdfCanvasRef.current;
-  //     const canvasContext = canvas.getContext("2d");
-  //     const imageData = canvasContext.getImageData(
-  //       0,
-  //       0,
-  //       canvas.width,
-  //       canvas.height
-  //     );
-  //     for (let i = 0; i < imageData.data.length; i += 4) {
-  //       imageData.data[i] = 255 - imageData.data[i];
-  //       imageData.data[i + 1] = 255 - imageData.data[i + 1];
-  //       imageData.data[i + 2] = 255 - imageData.data[i + 2];
-  //     }
-  //     canvasContext.putImageData(imageData, 0, 0);
-  //   }
-  // };
 
   useEffect(() => {
     (async function () {
@@ -72,7 +42,6 @@ const PDFViewer = ({ pdfPath, page }) => {
 
   return (
     <Box>
-      {/* <Button onClick={toggleInvertColors}>Invert Color</Button> */}
       <canvas
         style={{
           maxWidth: "47%",
