@@ -56,15 +56,22 @@ const Search = () => {
 
   return (
     <VStack h="100vh" pt={5} alignItems="center">
-      <Flex justifyContent="space-between" width="90%" mb={5}>
+      <Flex
+        justifyContent="space-between"
+        alignItems={"center"}
+        width="90%"
+        mb={5}
+      >
         <Link href={isProd ? `app://./setup.html` : `/setup`}>
           <Button size={"md"} colorScheme="telegram">
-            Back: Index More
+            Back
           </Button>
         </Link>
-        <Heading as="h1" size="lg">
-          ArchivEye
-        </Heading>
+        <Flex justifyContent="center" width="100%">
+          <Heading as="h1" size="lg" textAlign="center">
+            ArchivEye
+          </Heading>
+        </Flex>
         <Box />
       </Flex>
 
