@@ -12,6 +12,7 @@ import React from "react";
 type Props = {
   onSubmitFiles: (files: Array<string>) => void;
   label: string | null;
+  disabled: boolean;
   hintText: string;
   files: Array<string>;
   setFiles: React.Dispatch<SetStateAction<Array<string>>>;
@@ -22,6 +23,7 @@ const DocsPicker = ({
   hintText,
   label,
   files,
+  disabled,
   setFiles,
 }: Props) => {
   const [dragging, setDragging] = useState(false);
@@ -77,6 +79,7 @@ const DocsPicker = ({
         {label && <FormLabel>{label}</FormLabel>}
 
         <Input
+          isDisabled={disabled}
           type="file"
           onChange={handlePathChange}
           {...({ webkitdirectory: "" } as any)}

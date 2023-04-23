@@ -85,6 +85,7 @@ const SetupScreen = () => {
               ? `app://./precheck.html`
               : `/precheck`;
           }}
+          isDisabled={progressType === PgType.Indexing}
         >
           Settings
         </Button>
@@ -93,6 +94,7 @@ const SetupScreen = () => {
         PDF Documents Path
       </Heading>
       <DocsPicker
+        disabled={progressType === PgType.Indexing}
         hintText="Click here or Drag the folder here"
         label=""
         files={paths}
