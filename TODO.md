@@ -7,7 +7,6 @@
 - [x] Set index path to be at app path by default
 - [x] Add search system
 - [x] Fix app path bug
-- [ ] Add threading for multiple workers to index a directory
 
 ## Frontend
 
@@ -31,8 +30,9 @@
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
   - [x] Spike: PDF Viewer
+    - [ ] Add color invert (My EYES!)
   - [x] Pagination of search result display
-  - [ ] Search result highlighting
+  - [ ] Show text with highlights of where the search query appears
 - Pre-Check Page
   - [x] Check if config.ini is present, if not create one and ask user to set up
   - [x] Fix race condition between state update and config save
