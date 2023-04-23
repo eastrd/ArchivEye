@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     // Check if config.ini exists, if exists then proceed to setup page, otherwise go to precheck page
     ipcRenderer
-      .invoke("load-config")
+      .invoke("exists-config")
       .then((ifExists) => setNeedInit(!ifExists));
 
     ipcRenderer.invoke("get-env").then((p) => console.log("AppDir: ", p));

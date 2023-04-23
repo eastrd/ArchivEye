@@ -197,7 +197,7 @@ ipcMain.handle("save-config", (event, cfg: { Tess: string; Gs: string }) => {
   return;
 });
 
-ipcMain.handle("load-config", (event) => {
+ipcMain.handle("exists-config", (event) => {
   return fs.existsSync(path.join(appDir, "config.ini"));
 });
 
