@@ -29,6 +29,7 @@
   - [x] Display on a results table (Fix partial state issue)
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
+  - [ ] Fix bug where substring highlight is case-sensitive
   - [x] Implement PDF Viewer
     - [ ] Add color invert (My EYES!!)
     - [x] Add Zoom in / out (My EYES!)
