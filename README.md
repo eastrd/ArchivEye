@@ -99,4 +99,5 @@ This process involves scanning each folder named by the UUID of the PDF document
 
 ### Limitations
 
-OCR can be slow, particularly for PDF documents with hundreds of pages. Processing time may vary depending on your PC hardware specifications.
+- OCR can be slow, particularly for PDF documents with hundreds of pages. Processing time may vary depending on your PC hardware specifications. This can be resolved by utilizing multithreading.
+- It only supports English language for now due to time constraint.
