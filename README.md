@@ -18,36 +18,40 @@ ArchivEye focuses on accessibility, ensuring that even non-technical users can n
 
 ## Screenshots
 
-- TODO: (I'm tired, will work on this part tomorrow)
+### First Time Setup
 
-## Installation
+![First Time Setup Screenshot](/screenshots/precheck.png)
+
+### Indexing
+
+![Indexing Screenshot](/screenshots/index.png)
+
+### Search
+
+TODO
+
+## Third Party Tooling Installation - Windows Only (For Now)
 
 ### 1. Install Tesseract
 
 Tesseract is an integral part of ArchivEye, providing powerful OCR capabilities that converts extracted individual pages into searchable text.
 
-#### Windows
+Download and install the latest version 5.3.1 from [uni-mannheim](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe)
 
-- Download and install the latest version 5.3.1 from [uni-mannheim](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe)
-
-#### Mac
-
-- Under Terminal, run `brew install tesseract`
-
-#### Linux
-
-- Tesseract is already included in most Linux distributions
 
 ### 2. Install GhostScript
 
 GhostScript is used to extract individual pages from the PDF file as images for Tesseract to OCR.
 
-- Go to [this page](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases) and download and install according to your system platform (For Windows Users, use `gs10011w64.exe`)
+Go to [this page](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases) and download and install `gs10011w64.exe`
+
 
 ### 3. Tell ArchivEye the location of the above two
 
-- There will be a settings page when it is your first time using ArchivEye
-- Use the `Select` buttons for Tesseract and GhostScript:
-  - Select the directory where you have installed Tesseract, for example mine is `S:\Apps\Tesseract-OCR\`
-  - Select the directory where you have installed Ghostscript, for example mine is `S:\Apps\gs\gs10.01.1\`
-  - After that press `Check Installations` to proceed
+There will be a settings page when it is your first time using ArchivEye
+
+Use the `Select` buttons for Tesseract and GhostScript:
+
+- Select the directory where you have installed Tesseract, for example mine is `S:\Apps\Tesseract-OCR\`
+- Select the directory where you have installed Ghostscript, for example mine is `S:\Apps\gs\gs10.01.1\`
+- After that press `Validate & Proceed` to proceed
