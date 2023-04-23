@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   VStack,
@@ -31,6 +31,16 @@ function PreCheck() {
       isClosable: true,
     });
   };
+
+  useEffect(() => {
+    ipcRenderer.invoke("load-config").then((cfg) => {
+      console.log(cfg);
+      if (cfg.Tess && cfg.Gs) {
+        setTessPath(cfg.Tess);
+        setGsPath(cfg.Gs);
+      }
+    });
+  }, []);
 
   return (
     <VStack minHeight="100vh" justifyContent="center" alignItems="center">

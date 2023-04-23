@@ -174,6 +174,10 @@ ipcMain.handle("directory-pick", async (event) => {
   return !result.canceled ? result.filePaths[0] : "";
 });
 
+ipcMain.handle("load-config", (event) => {
+  return getConfigINI();
+});
+
 ipcMain.handle("save-config", (event, cfg: { Tess: string; Gs: string }) => {
   console.log("Received settings: ", cfg);
   // Save config.ini
@@ -304,4 +308,20 @@ const getTestPDFFilePath = (filename: string) => {
   } else {
     return path.join(app.getAppPath(), "..", "assets", filename);
   }
+};
+
+const getConfigINI = () => {
+  if (!fs.existsSync(path.join(appDir, "config.ini"))) {
+    return {
+      Tess: "",
+      Gs: "",
+    };
+  }
+  const cfg = ini.parse(
+    fs.readFileSync(path.join(appDir, "config.ini"), "utf-8")
+  );
+  return {
+    Tess: cfg.OCR.TESSERACT,
+    Gs: cfg.OCR.GHOSTSCRIPT.replace(/bin\\$/, "").replace(/bin\/$/, ""),
+  };
 };
