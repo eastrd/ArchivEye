@@ -1,8 +1,6 @@
 
 # ArchivEye
 
-![logo](/renderer/public/images/logo.png|width=50)
-
 ## Team Members
 
 - [eastrd](https://github.com/eastrd/)
