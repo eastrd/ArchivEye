@@ -68,7 +68,7 @@ export const gsCMD = async (inPDF: string, outDir: string): Promise<string> => {
     fs.readFileSync(path.join(appDir, "config.ini"), "utf-8")
   );
   return execute(
-    `${cfg.OCR.GHOSTSCRIPT}/gswin64c.exe -sDEVICE=pngalpha -o "${outDir}/%04d.png" -r300 "${inPDF}"`
+    `"${cfg.OCR.GHOSTSCRIPT}/gswin64c.exe" -sDEVICE=pngalpha -o "${outDir}/%04d.png" -r300 "${inPDF}"`
   );
 };
 
@@ -84,7 +84,7 @@ export const tessCMD = async (
   );
 
   return execute(
-    `${cfg.OCR.TESSERACT}/tesseract.exe "${inImg}" "${path.join(
+    `"${cfg.OCR.TESSERACT}/tesseract.exe" "${inImg}" "${path.join(
       outDir,
       baseName.split(".")[0]
     )}"`
