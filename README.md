@@ -9,13 +9,13 @@
 
 ## Description
 
-ArchivEye is a completely offline PDF OCR tool designed to protect the privacy and confidentiality of sensitive documents.
+ArchivEye is an offline PDF OCR tool developed to safeguard the privacy and confidentiality of sensitive documents.
 
-It is a powerful and intuitive GUI application specifically tailored for lawyers, OSINT researchers, journalists, and other professionals who frequently work with PDF documents.
+This user-friendly GUI application is designed for professionals like lawyers, OSINT researchers, journalists, and others who often work with PDF documents.
 
-ArchivEye's OCR technology allows users to search through scanned and non-searchable PDF files without needing to upload them to the cloud, providing an extra layer of privacy and security.
+ArchivEye's OCR technology enables users to search through scanned and non-searchable PDF files without uploading them to the cloud, offering added privacy and security.
 
-It focuses on accessibility, ensuring that even non-technical users can navigate and utilize the software effortlessly. It significantly reduces the time spent on manual tasks, such as opening multiple PDFs, reading, note taking manually, and cross-referencing information, by providing a unified interface for searching and indexing PDF documents.
+The software prioritizes ease of use, allowing even those without technical expertise to navigate and use it smoothly. By offering a unified interface for searching and indexing PDF documents, ArchivEye streamlines tasks such as opening multiple PDFs, reading, manual note-taking, and cross-referencing information, saving users valuable time.
 
 ---
 
