@@ -1,4 +1,4 @@
-import { app, dialog, ipcMain } from "electron";
+import { app, dialog, ipcMain, shell } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import path from "path";
@@ -238,6 +238,15 @@ ipcMain.handle(
     return getSubstringWithContext(pagePath, searchQuery, contextRange);
   }
 );
+
+ipcMain.on("open-link-external-browser", (event, url) => {
+  console.log(url);
+  shell.openExternal(url);
+  //   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+  //   shell.openExternal(url);
+  //   return { action: "deny" };
+  // });
+});
 
 ipcMain.handle("test-ocr", async (event) => {
   try {

@@ -1,4 +1,5 @@
 import { Box, Code, Heading, Link, Text } from "@chakra-ui/react";
+import { ipcRenderer } from "electron";
 
 const SetupInstructions = () => (
   <Box p={6}>
@@ -17,8 +18,13 @@ const SetupInstructions = () => (
       <Link
         px={1}
         color={"cyan"}
-        href="https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe"
-        isExternal
+        href="#"
+        onClick={() => {
+          ipcRenderer.send(
+            "open-link-external-browser",
+            "https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.20230401.exe"
+          );
+        }}
       >
         uni-mannheim
       </Link>
@@ -35,8 +41,13 @@ const SetupInstructions = () => (
       <Link
         px={1}
         color={"cyan"}
-        href="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases"
-        isExternal
+        href="#"
+        onClick={() => {
+          ipcRenderer.send(
+            "open-link-external-browser",
+            "https://github.com/ArtifexSoftware/ghostpdl-downloads/releases"
+          );
+        }}
       >
         this Github release page
       </Link>
