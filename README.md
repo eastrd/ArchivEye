@@ -67,7 +67,34 @@ During the first-time setup, you will need to configure the tool by specifying t
 ![Search Screenshot](/screenshots/search.png)
 
 
-## Additional Information
+## Additional Information: Design
 
-TODO:
-(Include any limitations, next steps, or design/architecture decisions)
+### Architecture Choice
+
+This tool prioritizes accessibility and privacy, so web apps and command-line tools are not suitable options.
+
+OCR capability is necessary, which initially suggests using Python with GUI libraries (e.g., `PyQT5`/`Tkinter`). However, these don't provide the same aesthetic appeal as a browser-based frontend built with `React`.
+
+Ultimately, an Electron app is chosen. Combining Electron with Python is possible, but integrating them proved challenging due to my limited experience with webpacks. As a result, I opted for `Electron` + `Next.js` = [`Nextron`](https://github.com/saltyshiomix/nextron) and `Node.js`.
+
+### Indexing Design
+
+For each PDF document, we generate a UUID to represent it. 
+
+A "master" record containing all generated UUIDs and their corresponding filesystem paths is also generated.
+
+### OCR Design
+
+This tool aims to search scanned PDF documents on a per-page basis. To achieve this, we need to extract every single page from a PDF document, perform OCR on the resulting images, and generate text files for each page.
+
+Ghostscript is used to extract individual PDF pages into images, while Tesseract handles OCR for each image. After OCR is completed for a PDF document, the per-page images are deleted from the filesystem.
+
+### Search Logic
+
+To display search results on a per-page basis, we store per-page text files and perform search operations as if conducting a recursive directory search.
+
+This process involves scanning each folder named by the UUID of the PDF document and searching through each text file to return the page number associated with its PDF document.
+
+### Limitations
+
+OCR can be slow, particularly for PDF documents with hundreds of pages. Processing time may vary depending on your PC hardware specifications.
