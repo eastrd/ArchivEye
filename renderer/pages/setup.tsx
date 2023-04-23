@@ -2,6 +2,7 @@
 import {
   Button,
   Divider,
+  Flex,
   Heading,
   Link,
   Modal,
@@ -73,10 +74,21 @@ const SetupScreen = () => {
   return (
     <VStack spacing={6} alignItems="left" minHeight="80vh" p={5}>
       {progressType === PgType.Complete && <Overlay link="/search" />}
-      <Heading as="h1" size="xl">
-        Setup
-      </Heading>
+      <Flex justifyContent="space-between">
+        <Heading as="h1" size="xl">
+          Setup
+        </Heading>
 
+        <Button
+          onClick={() => {
+            window.location.href = isProd
+              ? `app://./precheck.html`
+              : `/precheck`;
+          }}
+        >
+          Settings
+        </Button>
+      </Flex>
       <Heading as="h2" size="sm">
         PDF Documents Path
       </Heading>
