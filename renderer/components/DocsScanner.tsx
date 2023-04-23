@@ -96,7 +96,7 @@ const DocsPicker = ({
           bg="gray.50"
         >
           <Text color={"black"} fontSize="xl" fontWeight="semibold">
-            {files ? `Found ${files.length} PDF Files` : hintText}
+            {files.length ? `Found ${files.length} PDF Files` : hintText}
           </Text>
         </Box>
       </FormControl>
