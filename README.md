@@ -15,7 +15,7 @@ This user-friendly GUI application is designed for professionals like lawyers, O
 
 ArchivEye's OCR technology enables users to search through scanned and non-searchable PDF files without uploading them to the cloud, offering added privacy and security.
 
-The software prioritizes ease of use, allowing even those without technical expertise to navigate and use it smoothly. By offering a unified interface for searching and indexing PDF documents, ArchivEye streamlines tasks such as opening multiple PDFs, reading, manual note-taking, and cross-referencing information, saving users valuable time.
+The software prioritizes ease of use, allowing even those without technical expertise to navigate and use it smoothly. By offering a unified interface for searching and indexing multiple PDF documents within a folder, ArchivEye streamlines tasks such as opening numerous PDFs, reading, manual note-taking, and cross-referencing information, saving users valuable time.
 
 ---
 
