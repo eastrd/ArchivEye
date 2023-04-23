@@ -169,11 +169,9 @@ const SetupScreen = () => {
       <div style={{ textAlign: "center" }}>
         {alreadyHasIndexDB && (
           <>
-            <Text mt={7}>
-              Looks like you already have an database previously indexed
-            </Text>
+            <Text mt={7}>Looks like you already have a indexed database</Text>
             <Text mt={3} mb={7}>
-              You could resume searching with the indexed documents
+              You could resume searching with the previously indexed documents
             </Text>
             <Link
               _hover={{ textDecoration: "none" }}
