@@ -41,7 +41,7 @@ Go to this page and download and install gs10011w64.exe
 
 ## Download ArchivEye
 
-Simply go to the `Release` section of this Github page and download the `.exe` file, double click and it will install automatically
+Simply go to the [`Release`](https://github.com/eastrd/ArchivEye/releases/tag/v0.2.1) section of this Github page and download the `.exe` file, double click and it will install automatically
 
 ---
 
