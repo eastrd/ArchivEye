@@ -38,7 +38,7 @@ if (isProd) {
 
   mainWindow = createWindow("main", {
     width: 1100,
-    height: 1000,
+    height: 1100,
     autoHideMenuBar: true,
   });
 
