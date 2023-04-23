@@ -29,7 +29,7 @@
   - [x] Display on a results table (Fix partial state issue)
   - [x] Tooltip on hover of the pdf document name
   - [x] Implement view to the side
-  - [ ] Fix bug where substring highlight is case-sensitive
+  - [x] Fix bug where substring highlight is case-sensitive
   - [x] Implement PDF Viewer
     - [ ] Add color invert (My EYES!!)
     - [x] Add Zoom in / out (My EYES!)
@@ -39,8 +39,9 @@
   - [x] Check if config.ini is present, if not create one and ask user to set up
   - [x] Fix race condition between state update and config save
   - [x] If config.ini is present, validate that the binaries/folders in the paths exist
-  - [ ] Populate paths settings from config if exists
+  - [x] Populate paths settings from config if exists
 - [x] Fix Blank page routing bug
+- [x] Fix command path has space and wasn't escaped
 
 ## Meta
 
