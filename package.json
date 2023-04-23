@@ -1,8 +1,8 @@
 {
   "private": true,
   "name": "archiveye",
-  "description": "todo",
-  "version": "1.0.0",
+  "description": "An GUI offline OCR tool for searching scanned PDF documents on a per-page basis, prioritizing accessibility, privacy, and user experience with Nextron and NodeJS",
+  "version": "0.3.0",
   "author": "Eastrd",
   "main": "app/background.js",
   "scripts": {
@@ -11,6 +11,14 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
+    "productName": "Archiveye",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
     "extraResources": [
       {
         "from": "assets",
