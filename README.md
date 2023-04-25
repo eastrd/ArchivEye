@@ -3,7 +3,7 @@
 
 - Article and Demo Video [available here](https://ipyt.info/archiveye.html) thanks to [ATroubledMaker](https://ipyt.info/)
 
-## Team Members
+## Hackathon Team Members
 
 - [eastrd](https://github.com/eastrd/)
 - [ATroubledMaker](https://ipyt.info/)
