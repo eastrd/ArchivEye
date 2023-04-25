@@ -1,6 +1,8 @@
 
 # ArchivEye
 
+- Article and Demo Video [available here](https://ipyt.info/archiveye.html) thanks to [ATroubledMaker](https://ipyt.info/)
+
 ## Team Members
 
 - [eastrd](https://github.com/eastrd/)
