@@ -1,7 +1,7 @@
 
 # ArchivEye
 
-- Article and Demo Video [available here](https://ipyt.info/archiveye.html) thanks to [ATroubledMaker](https://ipyt.info/)
+Article and Demo Video [available here](https://ipyt.info/archiveye.html) thanks to [ATroubledMaker](https://ipyt.info/)
 
 ## Hackathon Team Members
 
