@@ -3,12 +3,6 @@
 
 Article and Demo Video [available here](https://ipyt.info/archiveye.html) thanks to [ATroubledMaker](https://ipyt.info/)
 
-## Hackathon Team Members
-
-- [eastrd](https://github.com/eastrd/)
-- [ATroubledMaker](https://ipyt.info/)
-- [deltagear](https://github.com/michaelgailling/) 
-
 ## Description
 
 ArchivEye is an offline PDF OCR tool developed to safeguard the privacy and confidentiality of sensitive documents.
@@ -71,35 +65,7 @@ Don't worry if you accidentally select the wrong paths, the `Validate & Proceed`
 ![Search Screenshot](/screenshots/search.png)
 
 
-## Additional Information: Design
+## Future Roadmap
 
-### Architecture Choice
-
-This tool prioritizes accessibility and privacy, so web apps and command-line tools are not suitable options.
-
-OCR capability is necessary, which initially suggests using Python with GUI libraries (e.g., `PyQT5`/`Tkinter`). However, these don't provide the same aesthetic appeal as a browser-based frontend built with `React`.
-
-Ultimately, an Electron app is chosen. Combining Electron with Python is possible, but integrating them proved challenging due to my limited experience with webpacks. As a result, I opted for `Electron` + `Next.js` = [`Nextron`](https://github.com/saltyshiomix/nextron) and `Node.js`.
-
-### Indexing Design
-
-For each PDF document, we generate a UUID to represent it. 
-
-A "master" record containing all generated UUIDs and their corresponding filesystem paths is also generated.
-
-### OCR Design
-
-This tool aims to search scanned PDF documents on a per-page basis. To achieve this, we need to extract every single page from a PDF document, perform OCR on the resulting images, and generate text files for each page.
-
-Ghostscript is used to extract individual PDF pages into images, while Tesseract handles OCR for each image. After OCR is completed for a PDF document, the per-page images are deleted from the filesystem.
-
-### Search Logic
-
-To display search results on a per-page basis, we store per-page text files and perform search operations as if conducting a recursive directory search.
-
-This process involves scanning each folder named by the UUID of the PDF document and searching through each text file to return the page number associated with its PDF document.
-
-## Limitations
-
-- OCR can be slow, particularly for PDF documents with hundreds of pages. Processing time may vary depending on your PC hardware specifications. This can be resolved by utilizing multithreading.
-- It only supports English language for now due to time constraint.
+- [ ] Make OCR index process faster
+- [ ] Support more languages
